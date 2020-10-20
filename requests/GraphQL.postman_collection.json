@@ -1,0 +1,609 @@
+{
+	"info": {
+		"_postman_id": "5a4ea088-0e31-4a16-af28-d3a567493955",
+		"name": "GraphQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hello World",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b2956e85-dfc9-4d1d-b55a-f379739415f0",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"GraphQL query for helloWorld\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.helloWorld).to.eql(\"Hello world!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n    helloWorld\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				},
+				"description": "# Getting Started\r\n\r\n## Let's start with a very basic greeting!\r\n\r\nThis is where the fun begins! \r\nEach postman request currently fails. Your job is either do the following:\r\n- Update the GraphQL request to make the Postman test pass\r\n- Update the code to make the postman test pass"
+			},
+			"response": []
+		},
+		{
+			"name": "GraphQL Server-Side Components",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "59f613f5-aac0-42d4-9af0-59eaf1a9a254",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The Query, the Schema, and the Resolver\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.helloWorld).to.eql(\"Hello world!\");\r",
+							"    pm.expect(jsonData.data.serverComponents).to.eql(\"The Query, The Schema, and The Resolver\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n    helloWorld\r\n    serverComponents\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				},
+				"description": "**HINT:** Check the needed GraphQL server-side components"
+			},
+			"response": []
+		},
+		{
+			"name": "GraphQL Default Scalar Types",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e8ba2678-7ee6-438f-8cb2-353f72c4015f",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"GraphQL Scalar Type\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.helloWorld).to.eql(\"Hello world!\");\r",
+							"    pm.expect(jsonData.data.helloWorld).to.be.a(\"string\");\r",
+							"    \r",
+							"    pm.expect(jsonData.data.thisIsAnInt).to.eql(19);\r",
+							"    pm.expect(jsonData.data.thisIsAnInt).to.be.a(\"number\");\r",
+							"    \r",
+							"    pm.expect(jsonData.data.thisIsAFloat).to.eql(712.94);\r",
+							"    pm.expect(jsonData.data.thisIsAFloat).to.be.a(\"number\");\r",
+							"\r",
+							"    pm.expect(jsonData.data.thisIsABoolean).to.be.true;\r",
+							"\r",
+							"    pm.expect(jsonData.data.thisIsAnId).to.eql(\"ID00001\");\r",
+							"    pm.expect(jsonData.data.thisIsAnId).to.be.a(\"string\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n    helloWorld\r\n    thisIsAnInt\r\n    thisIsAFloat\r\n    thisIsABoolean\r\n    thisIsAnId\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				},
+				"description": "# Scalar Type\r\n\r\nScalar types are primitive data types that can store only a single value. \r\n\r\nThe default scalar types that GraphQL offers are −\r\n\r\n**Int** − Signed 32-bit Integer\r\n\r\n**Float** − Signed double precision floating point value\r\n\r\n**String** − UTF - 8-character sequence\r\n\r\n**Boolean** − True or false\r\n\r\n**ID** − A unique identifier, often used as a unique identifier to fetch an object or as the key for a cache.\r\n\r\nThe syntax for defining a scalar type is as follows −\r\n> field: data_type\r\n\r\nThe snippet given below defines a field named greeting which returns String value.\r\n> greeting: String"
+			},
+			"response": []
+		},
+		{
+			"name": "GraphQL Object Type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0c5737ce-8517-4810-8fa6-e4300bea7bc9",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"GraphQL Object Type\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.employees).to.be.not.empty\r",
+							"    pm.expect(jsonData.data.employees).to.be.an(\"array\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n    employees{\r\n        id\r\n        firstName\r\n        lastName\r\n        email\r\n        companyId\r\n        weight\r\n        tenure\r\n        isWfh\r\n    }\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employee By ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "412596b9-46e1-4ffa-a910-0420a7760fca",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get Employee By ID returns valid data\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.employeeById.id).to.eql(\"EMP005\");\r",
+							"    pm.expect(jsonData.data.employeeById.firstName).to.eql(\"Jonathan\");\r",
+							"    pm.expect(jsonData.data.employeeById.lastName).to.eql(\"Estilo\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n  employeeById(id:\"EMP005\"){\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employee By Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "da92e152-6081-41c2-94fb-5434508ef8b1",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get Employee By Name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.employeeByName.id).to.eql(\"EMP001\");\r",
+							"    pm.expect(jsonData.data.employeeByName.firstName).to.eql(\"Nick\");\r",
+							"    pm.expect(jsonData.data.employeeByName.lastName).to.eql(\"Schrock\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n  employeeByName(firstName:\"Nick\"){\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employees Tenure Less Than",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "46c09543-a3a0-4553-89f2-d562cde43237",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get Employees Tenure Less Than\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    for (var i = 0; i<jsonData.data.employeesTenureLessThan.Length;i++){\r",
+							"        pm.expect(jsonData.data.employeesTenureLessThan[i].tenure).lessThan(12);\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n  employeesTenureLessThan(tenure:12){\r\n    id\r\n    firstName\r\n    lastName\r\n    tenure\r\n  }\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "01 - Get Employee With Multiple Arguments (ID)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "616120bd-b2dd-4c0f-b189-db58f00c6b92",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get Employee With Multiple Arguments (ID)\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.employee.id).to.eql(\"EMP003\");\r",
+							"    pm.expect(jsonData.data.employee.firstName).to.eql(\"Lee\");\r",
+							"    pm.expect(jsonData.data.employee.lastName).to.eql(\"Byron\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n  employee(id:\"EMP003\"){\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02 - Get Employee With Multiple Arguments (firstName)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b8cee1bb-800e-480c-903d-dfc90104e836",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get Employee With Multiple Arguments (firstName)\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.employee.id).to.eql(\"EMP003\");\r",
+							"    pm.expect(jsonData.data.employee.firstName).to.eql(\"Lee\");\r",
+							"    pm.expect(jsonData.data.employee.lastName).to.eql(\"Byron\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n  employee(firstName:\"Lee\"){\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Named GraphQL Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fd99f85e-8530-407d-adf5-df580be0d3eb",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Named GraphQL Request\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    for (var i = 0; i<jsonData.data.employeesTenureLessThan.Length;i++){\r",
+							"        pm.expect(jsonData.data.employeesTenureLessThan[i].tenure).lessThan(12);\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query employeeByFirstName($firstName:String) { \r\n  employee(firstName:$firstName)\r\n  {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
+						"variables": "{\r\n  \"firstName\": \"Jonathan\"\r\n}"
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
