@@ -1,2 +1,2 @@
 # graphql
-Sample GraphQL project
+GraphQL project
