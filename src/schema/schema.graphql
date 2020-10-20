@@ -1,0 +1,42 @@
+type Query {
+    helloWorld: String!
+    serverComponents: String
+    thisIsAnInt: Int,
+    thisIsAFloat: Float,
+    thisIsABoolean: Boolean,
+    thisIsAnId: ID,
+    employees: [Employee]
+    companies: [Company]
+    employeeById(id:ID!):Employee
+    employeeByName(firstName:String!):Employee
+    employeesTenureLessThan(tenure:Int):[Employee]
+    employeesByJobGrade(jobGrade:JobGrade):[Employee]
+    employee(id:ID, firstName:String):Employee
+}
+
+type Employee {
+    id: ID!,
+    firstName: String,
+    lastName: String,
+    email: String,
+    companyId: String,
+    weight: Float,
+    tenure: Int,
+    isWfh: Boolean
+    jobGrade: JobGrade
+}
+
+type Company {
+    id: ID!,
+    name: String,
+    location: String
+    employees: [Employee]
+}
+
+enum JobGrade {
+    Manager
+    PrincipalEngineer
+    SeniorEngineer
+    JuniorEngineer
+    CuteEngineer
+}
