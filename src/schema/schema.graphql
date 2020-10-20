@@ -1,10 +1,11 @@
 type Query {
     helloWorld: String!
     serverComponents: String
-    thisIsAnInt: Int,
-    thisIsAFloat: Float,
-    thisIsABoolean: Boolean,
-    thisIsAnId: ID,
+    thisIsAnInt: Int
+    thisIsAFloat: Float
+    thisIsABoolean: Boolean
+    thisIsAnId: ID
+    thisIsAnEnum: JobGrade
     employees: [Employee]
     companies: [Company]
     employeeById(id:ID!):Employee
@@ -14,21 +15,25 @@ type Query {
     employee(id:ID, firstName:String):Employee
 }
 
+type Mutation {
+    createEmployee(id:ID,firstName:String,lastName:String):String
+}
+
 type Employee {
-    id: ID!,
-    firstName: String,
-    lastName: String,
-    email: String,
-    companyId: String,
-    weight: Float,
-    tenure: Int,
+    id: ID!
+    firstName: String
+    lastName: String
+    email: String
+    companyId: String
+    weight: Float
+    tenure: Int
     isWfh: Boolean
     jobGrade: JobGrade
 }
 
 type Company {
-    id: ID!,
-    name: String,
+    id: ID!
+    name: String
     location: String
     employees: [Employee]
 }

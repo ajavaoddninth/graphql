@@ -161,7 +161,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "{\r\n    helloWorld\r\n    thisIsAnInt\r\n    thisIsAFloat\r\n    thisIsABoolean\r\n    thisIsAnId\r\n}",
+						"query": "{\r\n    helloWorld\r\n    thisIsAnInt\r\n    thisIsAFloat\r\n    thisIsABoolean\r\n    thisIsAnId\r\n    thisIsAnEnum\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -576,6 +576,67 @@
 					"graphql": {
 						"query": "query employeeByFirstName($firstName:String) { \r\n  employee(firstName:$firstName)\r\n  {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
 						"variables": "{\r\n  \"firstName\": \"Jonathan\"\r\n}"
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employees By Job Grade",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ccd5198-9e1b-4902-aab3-500277f3279a",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Named GraphQL Request\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.employeesByJobGrade).not.to.be.empty;\r",
+							"    pm.expect(jsonData.data.employeesByJobGrade[0].id).to.eql(\"EMP006\");\r",
+							"    pm.expect(jsonData.data.employeesByJobGrade[0].firstName).to.eql(\"Lorvin\");\r",
+							"    pm.expect(jsonData.data.employeesByJobGrade[0].lastName).to.eql(\"de la Cruz\");\r",
+							"    pm.expect(jsonData.data.employeesByJobGrade[0].jobGrade).to.eql(\"CuteEngineer\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\r\n  employeesByJobGrade(jobGrade:CuteEngineer){\r\n    id\r\n    firstName\r\n    lastName\r\n    jobGrade\r\n  }\r\n}",
+						"variables": ""
 					},
 					"options": {
 						"raw": {
