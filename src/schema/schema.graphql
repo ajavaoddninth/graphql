@@ -8,15 +8,16 @@ type Query {
     thisIsAnEnum: JobGrade
     employees: [Employee]
     companies: [Company]
-    employeeById(id:ID!):Employee
-    employeeByName(firstName:String!):Employee
-    employeesTenureLessThan(tenure:Int):[Employee]
-    employeesByJobGrade(jobGrade:JobGrade):[Employee]
-    employee(id:ID, firstName:String):Employee
+    employeeById(id:ID!): Employee
+    employeeByName(firstName:String!): Employee
+    employeesTenureLessThan(tenure:Int): [Employee]
+    employeesByJobGrade(jobGrade:JobGrade): [Employee]
+    employee(id:ID, firstName:String): Employee
 }
 
 type Mutation {
-    createEmployee(id:ID,firstName:String,lastName:String):String
+    createEmployee(id:ID,firstName:String,lastName:String): String
+    createEmployeeReturnsObject(id:ID,firstName:String,lastName:String): Employee
 }
 
 type Employee {

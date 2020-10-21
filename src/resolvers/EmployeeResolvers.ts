@@ -38,12 +38,22 @@ const EmployeeResolvers: IResolvers = {
     },
 
     Mutation: {
-        createEmployee:(_, args) => {
+        createEmployee:(_, args): string => {
             return Database.employees.create({
                 id:args.id,
                 firstName:args.firstName,
-                lastName:args.lastName}
-            )
+                lastName:args.lastName
+            })
+        },
+
+        createEmployeeReturnsObject:(_, args): Employee => {
+            const id = Database.employees.create({
+                id: args.id,
+                firstName: args.firstName,
+                lastName: args.lastName
+             })
+       
+             return Database.employees.get(id)
         }
     }
 }
