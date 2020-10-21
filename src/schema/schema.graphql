@@ -16,8 +16,9 @@ type Query {
 }
 
 type Mutation {
-    createEmployee(id:ID, firstName:String, lastName:String): String
-    createEmployeeReturnsObject(id:ID, firstName:String, lastName:String, email:String): Employee
+    createEmployee(employeeDetails: EmployeeInput): Employee
+    updateEmployee(id: ID, employeeDetails: EmployeeInput): Employee
+    deleteEmployee(id: ID): Employee
 }
 
 type Employee {
@@ -30,6 +31,13 @@ type Employee {
     tenure: Int
     isWfh: Boolean
     jobGrade: JobGrade
+}
+
+input EmployeeInput {
+    firstName: String
+    lastName: String
+    email: String
+    companyId: String
 }
 
 type Company {

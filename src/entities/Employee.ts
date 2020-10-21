@@ -1,13 +1,13 @@
 export default interface Employee {
-    id: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    companyId: string,
-    weight: number,
-    tenure: number,
-    isWfh: boolean,
-    jobGrade: JobGrade
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    companyId: string;
+    weight: number;
+    tenure: number;
+    isWfh: boolean;
+    jobGrade: JobGrade;
 } 
 
 export enum JobGrade {

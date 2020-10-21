@@ -1,6 +1,7 @@
 import { IResolvers } from "graphql-tools";
 import Employee, { JobGrade } from "../entities/Employee";
 import Database from "../database/Database";
+import EmployeeInput from "../inputTypes/EmployeeInput";
 
 const EmployeeResolvers: IResolvers = {
     Query: {
@@ -28,48 +29,64 @@ const EmployeeResolvers: IResolvers = {
             if (args.id){
                 return Database.employees.get(args.id);
             }
-            else if(args.firstName){
+            else if (args.firstName){
                 return Database.employees.list().find(item => item.firstName == args.firstName);
             }
-            else{
+            else {
                 return undefined;
             }
         }
     },
 
     Mutation: {
-        createEmployee:(_, args): string => {
-            return Database.employees.create({
-                id:args.id,
-                firstName:args.firstName,
-                lastName:args.lastName
-            })
-        },
-
-        createEmployeeReturnsObject:(_, args): Employee => {
-
-            // Validate employee ID
-            if (args.id == undefined) {
-                throw new Error("Cannot create an employee with null ID")
-            }
+        createEmployee:(_, args: { employeeDetails: EmployeeInput } ): Employee => {
 
             const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            const isValidEmail =  emailPattern.test(String(args.email).toLowerCase())
+            const isValidEmail =  emailPattern.test(String(args.employeeDetails.email).toLowerCase());
             
             // Validate email
-            if(!isValidEmail) {
-                throw new Error("email not in proper format")
+            if (!isValidEmail) {
+                throw new Error("email not in proper format");
             }
             
             const id = Database.employees.create({
-                id: args.id,
-                firstName: args.firstName,
-                lastName: args.lastName,
-                companyId: args.companyId,
-                email: args.email
-             })
+                firstName: args.employeeDetails.firstName,
+                lastName: args.employeeDetails.lastName,
+                companyId: args.employeeDetails.companyId,
+                email: args.employeeDetails.email
+            });
        
-             return Database.employees.get(id)
+            return Database.employees.get(id);
+        },
+
+        updateEmployee:(_, args: { id: string, employeeDetails: EmployeeInput }): Employee => {
+
+            const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            const isValidEmail =  emailPattern.test(String(args.employeeDetails.email).toLowerCase());
+            
+            // Validate email
+            if (!isValidEmail) {
+                throw new Error("email not in proper format");
+            }
+            
+            const employeeToUpdate = Database.employees.get(args.id);
+
+            Database.employees.update(
+                {
+                    ...employeeToUpdate,
+                    ...args.employeeDetails
+                });
+       
+            return Database.employees.get(args.id);
+        },
+
+        deleteEmployee:(_, args: { id: string }): Employee => {
+
+            const employeeToDelete = Database.employees.get(args.id);
+
+            Database.employees.delete(args.id);
+       
+            return employeeToDelete;
         }
     }
 }

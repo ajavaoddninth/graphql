@@ -11,7 +11,7 @@ const CompanyResolvers: IResolvers = {
     },
 
     Company: {
-        employees: (company: Company): Employee[] => Database.employees.list().filter(item => item.companyId == company.id)
+        employees: (root: Company): Employee[] => Database.employees.list().filter(item => item.companyId == root.id)
     }
 }
 
