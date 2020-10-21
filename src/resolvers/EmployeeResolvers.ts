@@ -47,10 +47,26 @@ const EmployeeResolvers: IResolvers = {
         },
 
         createEmployeeReturnsObject:(_, args): Employee => {
+
+            // Validate employee ID
+            if (args.id == undefined) {
+                throw new Error("Cannot create an employee with null ID")
+            }
+
+            const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            const isValidEmail =  emailPattern.test(String(args.email).toLowerCase())
+            
+            // Validate email
+            if(!isValidEmail) {
+                throw new Error("email not in proper format")
+            }
+            
             const id = Database.employees.create({
                 id: args.id,
                 firstName: args.firstName,
-                lastName: args.lastName
+                lastName: args.lastName,
+                companyId: args.companyId,
+                email: args.email
              })
        
              return Database.employees.get(id)

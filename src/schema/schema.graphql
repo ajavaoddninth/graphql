@@ -16,8 +16,8 @@ type Query {
 }
 
 type Mutation {
-    createEmployee(id:ID,firstName:String,lastName:String): String
-    createEmployeeReturnsObject(id:ID,firstName:String,lastName:String): Employee
+    createEmployee(id:ID, firstName:String, lastName:String): String
+    createEmployeeReturnsObject(id:ID, firstName:String, lastName:String, email:String): Employee
 }
 
 type Employee {
