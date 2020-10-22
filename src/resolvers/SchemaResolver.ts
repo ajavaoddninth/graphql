@@ -2,6 +2,7 @@ import { IResolvers, mergeResolvers } from "graphql-tools";
 import { JobGrade } from "../entities/Employee";
 import CompanyResolvers from "./CompanyResolvers";
 import EmployeeResolvers from "./EmployeeResolvers";
+import SurveyResolvers from "./SurveyResolver";
 
 const SchemaResolvers: IResolvers = {
     Query: {
@@ -35,4 +36,4 @@ const SchemaResolvers: IResolvers = {
     }
 }
 
-export default mergeResolvers([ SchemaResolvers, CompanyResolvers, EmployeeResolvers ]);
+export default mergeResolvers([ SchemaResolvers, CompanyResolvers, EmployeeResolvers, SurveyResolvers ]);

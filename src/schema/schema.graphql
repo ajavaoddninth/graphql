@@ -1,24 +1,34 @@
 type Query {
     helloWorld: String!
     serverComponents: String
+
     thisIsAnInt: Int
     thisIsAFloat: Float
     thisIsABoolean: Boolean
     thisIsAnId: ID
     thisIsAnEnum: JobGrade
+
     employees: [Employee]
     companies: [Company]
-    employeeById(id:ID!): Employee
-    employeeByName(firstName:String!): Employee
-    employeesTenureLessThan(tenure:Int): [Employee]
-    employeesByJobGrade(jobGrade:JobGrade): [Employee]
+
+    employeeById(id: ID!): Employee
+    employeeByName(firstName: String!): Employee
+    employeesTenureLessThan(tenure: Int): [Employee]
+    employeesByJobGrade(jobGrade: JobGrade): [Employee]
+    
     employee(id:ID, firstName:String): Employee
+
+    surveys: [Survey]
+    surveyByCompanyId(companyId: String): Survey
 }
 
 type Mutation {
     createEmployee(employeeDetails: EmployeeInput): Employee
     updateEmployee(id: ID, employeeDetails: EmployeeInput): Employee
     deleteEmployee(id: ID): Employee
+    createCompany(companyDetails: CompanyInput): Company
+    updateCompany(id: ID, companyDetails: CompanyInput): Company
+    deleteCompany(id: ID): Company
 }
 
 type Employee {
@@ -31,6 +41,14 @@ type Employee {
     tenure: Int
     isWfh: Boolean
     jobGrade: JobGrade
+}
+
+enum JobGrade {
+    Manager
+    PrincipalEngineer
+    SeniorEngineer
+    JuniorEngineer
+    CuteEngineer
 }
 
 input EmployeeInput {
@@ -47,10 +65,13 @@ type Company {
     employees: [Employee]
 }
 
-enum JobGrade {
-    Manager
-    PrincipalEngineer
-    SeniorEngineer
-    JuniorEngineer
-    CuteEngineer
+input CompanyInput {
+    name: String
+    location: String
+}
+
+type Survey {
+    id: String
+    companyId: String
+    questionIds: [String]
 }
