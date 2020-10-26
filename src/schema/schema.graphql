@@ -1,11 +1,13 @@
 type Query {
     helloWorld: String!
     serverComponents: String
+
     thisIsAnInt: Int
     thisIsAFloat: Float
     thisIsABoolean: Boolean
     thisIsAnId: ID
     thisIsAnEnum: JobGrade
+
     employees: [Employee]
     companies: [Company]
     employeeById(id: ID!): Employee
