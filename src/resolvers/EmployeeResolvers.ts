@@ -2,13 +2,11 @@ import { IResolvers } from "graphql-tools";
 import Employee, { JobGrade } from "../entities/Employee";
 import EmployeeInput from "../inputTypes/EmployeeInput";
 import Context from "../context/Context";
-import Poll from "../entities/Poll";
-import Vote from "../entities/Vote";
 
 const EmployeeResolvers: IResolvers = {
     Query: {
         employees: (_, __, context: Context): Employee[] => {
-            return context.employees.all();
+            return context.employees.list();
         },
 
         employeeById: (_, args: { id: string }, context: Context): Employee => {
@@ -37,7 +35,17 @@ const EmployeeResolvers: IResolvers = {
             else {
                 return undefined;
             }
-        }
+        },
+
+        employeeByUserName: (_, args: { userName: string }, context: Context): Employee => {
+            const employee = context.employees.find(item => item.userName == args.userName);
+
+            if (employee === undefined) {
+                throw new Error("Invalid username");
+            }
+
+            return employee;
+        },
     },
 
     Mutation: {
@@ -74,19 +82,6 @@ const EmployeeResolvers: IResolvers = {
 
         deleteEmployee: (_, args: { id: string }, context: Context): Employee => {
             return context.employees.delete(args.id);
-        }
-    },
-
-    Employee: {
-        polls: (root: Employee, _, context: Context): Poll[] => {
-            return context.polls
-                .filter(
-                    item => item.companyId === root.companyId,
-                    (a, b) => new Date(b.createTime).getTime() - new Date(a.createTime).getTime());
-        },
-
-        votes: (root: Employee, _, context: Context): Vote[] => {
-            return context.votes.filter(item => item.employeeId === root.id);
         }
     }
 }

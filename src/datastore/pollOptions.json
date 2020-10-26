@@ -1,20 +1,5 @@
 [
   {
-    "id": "Bk1zXN7_P",
-    "pollId": "B1tWmNX_v",
-    "option": "Yes"
-  },
-  {
-    "id": "BJ7HXN7dP",
-    "pollId": "B1tWmNX_v",
-    "option": "Ok"
-  },
-  {
-    "id": "r16wu4Q_v",
-    "pollId": "B1tWmNX_v",
-    "option": "Hellow"
-  },
-  {
     "id": "SJSO-AQuP",
     "pollId": "H1WO-AQ_v",
     "option": "Yes"
@@ -28,5 +13,10 @@
     "id": "rJ2u-Am_w",
     "pollId": "H1WO-AQ_v",
     "option": "Maybe"
+  },
+  {
+    "id": "B1SVmv4dv",
+    "pollId": "H1WO-AQ_v",
+    "option": "dsfa"
   }
 ]

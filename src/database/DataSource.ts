@@ -1,13 +1,17 @@
+export type Predicate<TEntity> = (entity: TEntity) => boolean;
+
+export type Comparer<TEntity> = (first: TEntity, second: TEntity) => number;
+
 export default interface DataSource<TEntity> {
     get(id: string): TEntity;
 
-    all(sort?: (first: TEntity, second: TEntity) => number): TEntity[];
+    list(sort?: Comparer<TEntity>): TEntity[];
 
-    count(predicate: (entity: TEntity) => boolean): number;
+    count(predicate: Predicate<TEntity>): number;
 
-    find(predicate: (entity: TEntity) => boolean): TEntity | undefined;
+    find(predicate: Predicate<TEntity>): TEntity | undefined;
 
-    filter(predicate: (entity: TEntity) => boolean, sort?: (first: TEntity, second: TEntity) => number): TEntity[];
+    filter(predicate: Predicate<TEntity>, sort?: Comparer<TEntity>): TEntity[];
 
     create(entity: Partial<TEntity>): TEntity;
     

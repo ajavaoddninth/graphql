@@ -8,16 +8,21 @@ type Query {
     thisIsAnId: ID
     thisIsAnEnum: JobGrade
 
-    employees: [Employee]
     companies: [Company]
+    company(id: ID): Company
+
+    employees: [Employee]
     employeeById(id: ID!): Employee
     employeeByName(name: String!): Employee
     employeesTenureLessThan(tenure: Int): [Employee]
     employeesByJobGrade(jobGrade: JobGrade): [Employee]
     employee(id: ID, firstName: String): Employee
-    company(id: ID): Company
-    pollsByEmployeeId(employeeId: ID!): [Poll]
+    employeeByUserName(userName: String): Employee
+
+    pollsByCompanyId(companyId: ID!): [Poll]
+
     optionsByPollId(pollId: ID!): [PollOption]
+
     vote(employeeId: ID!, pollId: ID!): Vote
 }
 
@@ -25,15 +30,19 @@ type Mutation {
     createCompany(companyDetails: CompanyInput): Company
     updateCompany(id: ID!, companyDetails: CompanyInput): Company
     deleteCompany(id: ID!): Company
+
     createEmployee(companyId: ID!, employeeDetails: EmployeeInput): Employee
     updateEmployee(id: ID!, employeeDetails: EmployeeInput): Employee
     deleteEmployee(id: ID!): Employee
+
     createPoll(companyId: ID!, title: String!, createdByEmployeeId: ID!): Poll
     deletePoll(id: ID!): Poll
+
     createPollOption(pollId: ID!, option: String!): PollOption
     deletePollOption(id: ID!): PollOption
-    answerPoll(employeeId: ID!, pollId: ID!, optionId: ID!): Boolean
-    removeAnswer(employeeId: ID!, pollId: ID!): Boolean
+
+    vote(employeeId: ID!, pollId: ID!, optionId: ID!): Vote
+    unvote(employeeId: ID!, pollId: ID!): Vote
 }
 
 type Company {
@@ -41,7 +50,6 @@ type Company {
     name: String
     location: String
     employees: [Employee]
-    polls: [Poll]
 }
 
 type Employee {
@@ -54,14 +62,11 @@ type Employee {
     tenure: Int
     isWfh: Boolean
     jobGrade: JobGrade
-    polls: [Poll]
-    votes: [Vote]
 }
 
 type Poll {
     id: ID!
     title: String
-    options: [PollOption]
     createdByEmployeeId: ID!
     createdByEmployee: Employee
     createdDate: DateTime

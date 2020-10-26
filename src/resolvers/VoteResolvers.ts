@@ -12,39 +12,35 @@ const VoteResolvers: IResolvers = {
     },
 
     Mutation: {
-        answerPoll: (_, args: { employeeId: string, pollId: string, optionId: string }, context: Context): boolean => {
-            try {
-                // Remove old votes for requested poll    
-                context.votes
-                    .filter(item =>
-                        item.employeeId === args.employeeId &&
-                        item.pollId === args.pollId)
-                    .map(item => context.votes.delete(item.id));
-
-                context.votes.create({
-                    employeeId: args.employeeId,
-                    pollId: args.pollId,
-                    optionId: args.optionId
-                });
-
-                return true;
-            } catch {
-                return false;
+        vote: (_, args: { employeeId: string, pollId: string, optionId: string }, context: Context): Vote => {
+            // Remove old votes for requested poll    
+            const oldVote = context.votes
+                .find(item =>
+                    item.employeeId === args.employeeId &&
+                    item.pollId === args.pollId);
+            
+            if (oldVote) {
+                context.votes.delete(oldVote.id);
             }
+
+            return context.votes.create({
+                employeeId: args.employeeId,
+                pollId: args.pollId,
+                optionId: args.optionId
+            });
         },
 
-        removeAnswer: (_, args: { employeeId: string, pollId: string }, context: Context): boolean => {
-            try {  
-                context.votes
-                    .filter(item =>
-                        item.employeeId === args.employeeId &&
-                        item.pollId === args.pollId)
-                    .map(item => context.votes.delete(item.id));
-
-                return true;
-            } catch {
-                return false;
+        unvote: (_, args: { employeeId: string, pollId: string }, context: Context): Vote | undefined => {
+            const oldVote = context.votes
+                .find(item =>
+                    item.employeeId === args.employeeId &&
+                    item.pollId === args.pollId);
+            
+            if (oldVote) {
+                context.votes.delete(oldVote.id);
             }
+
+            return oldVote;
         }
     }
 };

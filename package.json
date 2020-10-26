@@ -2,7 +2,7 @@
   "name": "graphqltypescriptexpress",
   "version": "1.0.0",
   "description": "GraphQL using Typescript and Express",
-  "main": "dist/server.js",
+  "main": "src/server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node-dev src/server.ts"

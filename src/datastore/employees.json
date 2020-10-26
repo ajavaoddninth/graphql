@@ -8,7 +8,8 @@
       "tenure": 15,
       "isWfh": true,
       "jobGrade": "Manager",
-      "companyId": "CEL001"
+      "companyId": "CEL001",
+      "userName": "nick.schrock"
    },
    {
       "id": "EMP002",
@@ -19,7 +20,8 @@
       "tenure": 12,
       "isWfh": true,
       "jobGrade": "PrincipalEngineer",
-      "companyId": "CEL001"
+      "companyId": "CEL001",
+      "userName": "dan.schafer"
    },
    {
       "id": "EMP003",
@@ -30,7 +32,8 @@
       "tenure": 11,
       "isWfh": false,
       "jobGrade": "SeniorEngineer",
-      "companyId": "CEL001"
+      "companyId": "CEL001",
+      "userName": "lee.byron"
    },
    {
       "id": "EMP004",
@@ -41,7 +44,8 @@
       "tenure": 12,
       "isWfh": false,
       "jobGrade": "JuniorEngineer",
-      "companyId": "CITECH01"
+      "companyId": "CITECH01",
+      "userName": "roy.fielding"
    },
    {
       "id": "EMP005",
@@ -52,7 +56,8 @@
       "tenure": 2,
       "isWfh": true,
       "jobGrade": "PrincipalEngineer",
-      "companyId": "CITECH01"
+      "companyId": "CITECH01",
+      "userName": "jonathan.estilo"
    },
    {
       "id": "EMP006",
@@ -63,6 +68,7 @@
       "tenure": 2,
       "isWfh": true,
       "jobGrade": "CuteEngineer",
-      "companyId": "CITECH01"
+      "companyId": "CITECH01",
+      "userName": "lorvin.de.la.cruz"
    }
 ]

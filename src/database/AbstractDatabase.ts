@@ -1,5 +1,5 @@
 import { Collection, Entity } from "notarealdb";
-import DataSource from "./DataSource";
+import DataSource, { Comparer, Predicate } from "./DataSource";
 
 export default abstract class AbstractDatabase<TEntity extends Entity> implements DataSource<TEntity> {
     constructor(
@@ -9,7 +9,7 @@ export default abstract class AbstractDatabase<TEntity extends Entity> implement
         return this.rootCollection.get(id);
     }
 
-    public all(sort?: (first: TEntity, second: TEntity) => number): TEntity[] {
+    public list(sort?: Comparer<TEntity>): TEntity[] {
         const allData = this.rootCollection.list();
 
         if (sort !== undefined) {
@@ -19,11 +19,11 @@ export default abstract class AbstractDatabase<TEntity extends Entity> implement
         return allData;
     }
 
-    public find(predicate: (entity: TEntity) => boolean): TEntity | undefined {
+    public find(predicate: Predicate<TEntity>): TEntity | undefined {
         return this.rootCollection.list().find(predicate);
     }
     
-    public filter(predicate: (entity: TEntity) => boolean, sort?: (first: TEntity, second: TEntity) => number): TEntity[] {
+    public filter(predicate: Predicate<TEntity>, sort?: Comparer<TEntity>): TEntity[] {
         const filteredData = this.rootCollection.list().filter(predicate);
 
         if (sort !== undefined) {
@@ -33,7 +33,7 @@ export default abstract class AbstractDatabase<TEntity extends Entity> implement
         return filteredData;
     }
 
-    public count(predicate: (entity: TEntity) => boolean): number {
+    public count(predicate: Predicate<TEntity>): number {
         return this.rootCollection.list().filter(predicate).length;
     }
 

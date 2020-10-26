@@ -8,6 +8,7 @@ export default interface Employee {
     tenure: number;
     isWfh: boolean;
     jobGrade: JobGrade;
+    userName: string;
 } 
 
 export enum JobGrade {

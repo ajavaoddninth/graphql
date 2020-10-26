@@ -1,14 +1,13 @@
 import { IResolvers } from "graphql-tools";
 import Company from "../entities/Company";
 import Employee from "../entities/Employee";
-import Poll from "../entities/Poll";
 import CompanyInput from "../inputTypes/CompanyInput";
 import Context from "../context/Context";
 
 const CompanyResolvers: IResolvers = {
     Query: {
         companies: (_, __, context: Context): Company[] => {
-            return context.companies.all();
+            return context.companies.list();
         },
 
         company: (_, args: { id: string }, context: Context): Company => {
@@ -36,13 +35,6 @@ const CompanyResolvers: IResolvers = {
     Company: {
         employees: (root: Company, _, context: Context): Employee[] => {
             return context.employees.filter(item => item.companyId == root.id);
-        },
-
-        polls: (root: Company, _, context: Context): Poll[] => {
-            return context.polls
-                .filter(
-                    item => item.companyId == root.id,
-                    (a, b) => new Date(b.createTime).getTime() - new Date(a.createTime).getTime());
         }
     }
 }

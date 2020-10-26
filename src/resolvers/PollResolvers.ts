@@ -2,17 +2,15 @@ import { IResolvers } from "graphql-tools";
 import Context from "../context/Context";
 import Employee from "../entities/Employee";
 import Poll from "../entities/Poll";
-import PollOption from "../entities/PollOption";
 
 const PollResolvers: IResolvers = {
     Query: {
-        pollsByEmployeeId: (_, args: { employeeId: string }, context: Context): Poll[] => {
-            const employee = context.employees.get(args.employeeId);
+        pollsByCompanyId: (_, args: { companyId: string }, context: Context): Poll[] => {
             return context.polls
                 .filter(
-                    item => item.companyId === employee.companyId,
+                    item => item.companyId === args.companyId,
                     (a, b) => new Date(b.createTime).getTime() - new Date(a.createTime).getTime());
-        } 
+        }
     },
 
     Mutation: {
@@ -31,10 +29,6 @@ const PollResolvers: IResolvers = {
     },
 
     Poll: {
-        options: (root: Poll, _, context: Context): PollOption[] => {
-            return context.pollOptions.filter(item => item.pollId == root.id);
-        },
-
         createdByEmployee: (root: Poll, _, context: Context): Employee => {
             return context.employees.get(root.createdByEmployeeId);
         }
