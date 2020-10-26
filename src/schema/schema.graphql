@@ -8,17 +8,38 @@ type Query {
     thisIsAnEnum: JobGrade
     employees: [Employee]
     companies: [Company]
-    employeeById(id:ID!): Employee
-    employeeByName(firstName:String!): Employee
-    employeesTenureLessThan(tenure:Int): [Employee]
-    employeesByJobGrade(jobGrade:JobGrade): [Employee]
-    employee(id:ID, firstName:String): Employee
+    employeeById(id: ID!): Employee
+    employeeByName(name: String!): Employee
+    employeesTenureLessThan(tenure: Int): [Employee]
+    employeesByJobGrade(jobGrade: JobGrade): [Employee]
+    employee(id: ID, firstName: String): Employee
+    company(id: ID): Company
+    pollsByEmployeeId(employeeId: ID!): [Poll]
+    optionsByPollId(pollId: ID!): [PollOption]
+    vote(employeeId: ID!, pollId: ID!): Vote
 }
 
 type Mutation {
-    createEmployee(employeeDetails: EmployeeInput): Employee
-    updateEmployee(id: ID, employeeDetails: EmployeeInput): Employee
-    deleteEmployee(id: ID): Employee
+    createCompany(companyDetails: CompanyInput): Company
+    updateCompany(id: ID!, companyDetails: CompanyInput): Company
+    deleteCompany(id: ID!): Company
+    createEmployee(companyId: ID!, employeeDetails: EmployeeInput): Employee
+    updateEmployee(id: ID!, employeeDetails: EmployeeInput): Employee
+    deleteEmployee(id: ID!): Employee
+    createPoll(companyId: ID!, title: String!, createdByEmployeeId: ID!): Poll
+    deletePoll(id: ID!): Poll
+    createPollOption(pollId: ID!, option: String!): PollOption
+    deletePollOption(id: ID!): PollOption
+    answerPoll(employeeId: ID!, pollId: ID!, optionId: ID!): Boolean
+    removeAnswer(employeeId: ID!, pollId: ID!): Boolean
+}
+
+type Company {
+    id: ID!
+    name: String
+    location: String
+    employees: [Employee]
+    polls: [Poll]
 }
 
 type Employee {
@@ -31,21 +52,45 @@ type Employee {
     tenure: Int
     isWfh: Boolean
     jobGrade: JobGrade
+    polls: [Poll]
+    votes: [Vote]
 }
+
+type Poll {
+    id: ID!
+    title: String
+    options: [PollOption]
+    createdByEmployeeId: ID!
+    createdByEmployee: Employee
+    createdDate: DateTime
+}
+
+type PollOption {
+    id: ID!
+    option: String
+    tally: Int
+}
+
+type Vote {
+    employeeId: ID
+    pollId: ID
+    optionId: ID
+}
+
+# Input types
 
 input EmployeeInput {
     firstName: String
     lastName: String
     email: String
-    companyId: String
 }
 
-type Company {
-    id: ID!
+input CompanyInput {
     name: String
     location: String
-    employees: [Employee]
 }
+
+# Enumeration types
 
 enum JobGrade {
     Manager
@@ -54,3 +99,7 @@ enum JobGrade {
     JuniorEngineer
     CuteEngineer
 }
+
+# Scalar types
+
+scalar DateTime

@@ -1,17 +1,49 @@
 import { IResolvers } from "graphql-tools";
 import Company from "../entities/Company";
-import Database from "../database/Database";
 import Employee from "../entities/Employee";
+import Poll from "../entities/Poll";
+import CompanyInput from "../inputTypes/CompanyInput";
+import Context from "../context/Context";
 
 const CompanyResolvers: IResolvers = {
     Query: {
-        companies: (): Company[] => {
-            return Database.companies.list();
+        companies: (_, __, context: Context): Company[] => {
+            return context.companies.all();
+        },
+
+        company: (_, args: { id: string }, context: Context): Company => {
+            return context.companies.get(args.id);
+        }
+    },
+
+    Mutation: {
+        createCompany: (_, args: { companyDetails: CompanyInput }, context: Context): Company => {
+            return context.companies.create({
+                name: args.companyDetails.name,
+                location: args.companyDetails.location
+            });
+        },
+
+        updateCompany: (_, args: { id: string, companyDetails: CompanyInput }, context: Context): Company => {
+            return context.companies.update(args.id, args.companyDetails);
+        },
+
+        deleteCompany: (_, args: { id: string }, context: Context): Company => {
+            return context.companies.delete(args.id);
         }
     },
 
     Company: {
-        employees: (root: Company): Employee[] => Database.employees.list().filter(item => item.companyId == root.id)
+        employees: (root: Company, _, context: Context): Employee[] => {
+            return context.employees.filter(item => item.companyId == root.id);
+        },
+
+        polls: (root: Company, _, context: Context): Poll[] => {
+            return context.polls
+                .filter(
+                    item => item.companyId == root.id,
+                    (a, b) => new Date(b.createTime).getTime() - new Date(a.createTime).getTime());
+        }
     }
 }
 

@@ -1,36 +1,38 @@
 import { IResolvers } from "graphql-tools";
 import Employee, { JobGrade } from "../entities/Employee";
-import Database from "../database/Database";
 import EmployeeInput from "../inputTypes/EmployeeInput";
+import Context from "../context/Context";
+import Poll from "../entities/Poll";
+import Vote from "../entities/Vote";
 
 const EmployeeResolvers: IResolvers = {
     Query: {
-        employees: (): Employee[] => {
-            return Database.employees.list();
+        employees: (_, __, context: Context): Employee[] => {
+            return context.employees.all();
         },
 
-        employeeById: (_, args: { id: string }): Employee => {
-            return Database.employees.get(args.id);
+        employeeById: (_, args: { id: string }, context: Context): Employee => {
+            return context.employees.get(args.id);
         },
 
-        employeeByName: (_, args: { firstName: string }): Employee | undefined => {
-            return Database.employees.list().find(item => item.firstName == args.firstName);
+        employeeByName: (_, args: { name: string }, context: Context): Employee | undefined => {
+            return context.employees.find(item => `${item.firstName} ${item.lastName}` == args.name);
         },
 
-        employeesTenureLessThan: (_, args: { tenure: number }): Employee[] => {
-            return Database.employees.list().filter(item => item.tenure < args.tenure);
+        employeesTenureLessThan: (_, args: { tenure: number }, context: Context): Employee[] => {
+            return context.employees.filter(item => item.tenure < args.tenure);
         },
 
-        employeesByJobGrade: (_, args: { jobGrade: JobGrade }): Employee[] => {
-            return Database.employees.list().filter(item => item.jobGrade == args.jobGrade);
+        employeesByJobGrade: (_, args: { jobGrade: JobGrade }, context: Context): Employee[] => {
+            return context.employees.filter(item => item.jobGrade == args.jobGrade);
         },
 
-        employee:(_, args: { id: string, firstName: string }): Employee | undefined => {
-            if (args.id){
-                return Database.employees.get(args.id);
+        employee:(_, args: { id: string, firstName: string }, context: Context): Employee | undefined => {
+            if (args.id) {
+                return context.employees.get(args.id);
             }
-            else if (args.firstName){
-                return Database.employees.list().find(item => item.firstName == args.firstName);
+            else if (args.firstName) {
+                return context.employees.find(item => item.firstName == args.firstName);
             }
             else {
                 return undefined;
@@ -39,7 +41,7 @@ const EmployeeResolvers: IResolvers = {
     },
 
     Mutation: {
-        createEmployee:(_, args: { employeeDetails: EmployeeInput } ): Employee => {
+        createEmployee: (_, args: { companyId: string, employeeDetails: EmployeeInput }, context: Context): Employee => {
 
             const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             const isValidEmail =  emailPattern.test(String(args.employeeDetails.email).toLowerCase());
@@ -49,17 +51,15 @@ const EmployeeResolvers: IResolvers = {
                 throw new Error("email not in proper format");
             }
             
-            const id = Database.employees.create({
+            return context.employees.create({
                 firstName: args.employeeDetails.firstName,
                 lastName: args.employeeDetails.lastName,
-                companyId: args.employeeDetails.companyId,
+                companyId: args.companyId,
                 email: args.employeeDetails.email
             });
-       
-            return Database.employees.get(id);
         },
 
-        updateEmployee:(_, args: { id: string, employeeDetails: EmployeeInput }): Employee => {
+        updateEmployee: (_, args: { id: string, employeeDetails: EmployeeInput }, context: Context): Employee => {
 
             const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             const isValidEmail =  emailPattern.test(String(args.employeeDetails.email).toLowerCase());
@@ -69,24 +69,24 @@ const EmployeeResolvers: IResolvers = {
                 throw new Error("email not in proper format");
             }
             
-            const employeeToUpdate = Database.employees.get(args.id);
-
-            Database.employees.update(
-                {
-                    ...employeeToUpdate,
-                    ...args.employeeDetails
-                });
-       
-            return Database.employees.get(args.id);
+            return context.employees.update(args.id, args.employeeDetails);
         },
 
-        deleteEmployee:(_, args: { id: string }): Employee => {
+        deleteEmployee: (_, args: { id: string }, context: Context): Employee => {
+            return context.employees.delete(args.id);
+        }
+    },
 
-            const employeeToDelete = Database.employees.get(args.id);
+    Employee: {
+        polls: (root: Employee, _, context: Context): Poll[] => {
+            return context.polls
+                .filter(
+                    item => item.companyId === root.companyId,
+                    (a, b) => new Date(b.createTime).getTime() - new Date(a.createTime).getTime());
+        },
 
-            Database.employees.delete(args.id);
-       
-            return employeeToDelete;
+        votes: (root: Employee, _, context: Context): Vote[] => {
+            return context.votes.filter(item => item.employeeId === root.id);
         }
     }
 }

@@ -1,7 +1,11 @@
 import { IResolvers, mergeResolvers } from "graphql-tools";
 import { JobGrade } from "../entities/Employee";
+import VoteResolvers from "./VoteResolvers";
 import CompanyResolvers from "./CompanyResolvers";
 import EmployeeResolvers from "./EmployeeResolvers";
+import PollOptionResolvers from "./PollOptionResolvers";
+import PollResolvers from "./PollResolvers";
+import { GraphQLDateTime } from "graphql-iso-date";
 
 const SchemaResolvers: IResolvers = {
     Query: {
@@ -32,7 +36,9 @@ const SchemaResolvers: IResolvers = {
         thisIsAnEnum: (): JobGrade => {
             return JobGrade.M1;
         }
-    }
-}
+    },
 
-export default mergeResolvers([ SchemaResolvers, CompanyResolvers, EmployeeResolvers ]);
+    DateTime: GraphQLDateTime
+};
+
+export default mergeResolvers([ SchemaResolvers, CompanyResolvers, EmployeeResolvers, PollResolvers, PollOptionResolvers, VoteResolvers ]);
