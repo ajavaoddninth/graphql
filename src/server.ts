@@ -6,7 +6,9 @@ import { createSchema } from "./schema/Schema";
 import { createContext } from "./context/Context";
 import formatError from "./errors/FormatError";
 
-const PORT = 4000;
+// The client is built with the assumption
+// that the server is running on port 54321
+const PORT = 54321;
 
 /**
  * Main function for the GraphQL Server.
