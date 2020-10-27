@@ -118,7 +118,7 @@
 						}
 					]
 				},
-				"description": "**HINT:** Check the needed GraphQL server-side components"
+				"description": "**HINT:** Check the needed GraphQL server-side components\r\n\r\n**Schema**\r\n\r\nA GraphQL schema is at the center of any GraphQL server implementation and describes the functionality available to the clients which connect to it.\r\n\r\n**Query**\r\n\r\nA GraphQL query is the client application request to retrieve data from database or legacy API's.\r\n\r\n**Resolver**\r\n\r\nResolvers provide the instructions for turning a GraphQL operation into data. They resolve the query to data by defining resolver functions."
 			},
 			"response": []
 		},
@@ -128,7 +128,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "e8ba2678-7ee6-438f-8cb2-353f72c4015f",
+						"id": "8ca2ca20-1fd8-4747-bef9-c2db90d794a5",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -149,6 +149,9 @@
 							"\r",
 							"    pm.expect(jsonData.data.thisIsAnId).to.eql(\"ID00001\");\r",
 							"    pm.expect(jsonData.data.thisIsAnId).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(jsonData.data.thisIsAnEnum).to.eql(\"Manager\");\r",
+							"    pm.expect(jsonData.data.thisIsAnEnum).to.be.a(\"string\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -246,7 +249,8 @@
 							"disabled": true
 						}
 					]
-				}
+				},
+				"description": "**Object Type**\r\n\r\nThe object type is the most common type used in a schema and represents a group of fields. \r\n\r\nEach field inside an object type maps to another type, thereby allowing nested types.\r\n\r\nIn other words, an object type is composed of multiple scalar types or object types.\r\n\r\nThe syntax for defining an object type is given below\r\n\r\n    type object_type_name\r\n    {\r\n        field1: data_type\r\n        field2:data_type \r\n        ...\r\n        fieldn:data_type\r\n    }"
 			},
 			"response": []
 		},
@@ -338,7 +342,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "{\r\n  employeeByName(firstName:\"Nick\"){\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
+						"query": "{\r\n  employeeByName(name:\"Nick Schrock\"){\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -428,7 +432,7 @@
 			"response": []
 		},
 		{
-			"name": "01 - Get Employee With Multiple Arguments (ID)",
+			"name": "Get Employee With Multiple Arguments (Argument: ID)",
 			"event": [
 				{
 					"listen": "test",
@@ -487,7 +491,7 @@
 			"response": []
 		},
 		{
-			"name": "02 - Get Employee With Multiple Arguments (firstName)",
+			"name": "Get Employee With Multiple Arguments (Argument: firstName)",
 			"event": [
 				{
 					"listen": "test",
@@ -559,9 +563,9 @@
 							"\r",
 							"pm.test(\"Named GraphQL Request\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    for (var i = 0; i<jsonData.data.employeesTenureLessThan.Length;i++){\r",
-							"        pm.expect(jsonData.data.employeesTenureLessThan[i].tenure).lessThan(12);\r",
-							"    }\r",
+							"    pm.expect(jsonData.data.employee.id).to.eql(\"EMP005\");\r",
+							"    pm.expect(jsonData.data.employee.firstName).to.eql(\"Jonathan\");\r",
+							"    pm.expect(jsonData.data.employee.lastName).to.eql(\"Estilo\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -616,7 +620,7 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Named GraphQL Request\", function () {\r",
+							"pm.test(\"Get Employees By Job Grade\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.data.employeesByJobGrade).not.to.be.empty;\r",
 							"    pm.expect(jsonData.data.employeesByJobGrade[0].id).to.eql(\"EMP006\");\r",
@@ -636,6 +640,388 @@
 					"mode": "graphql",
 					"graphql": {
 						"query": "{\r\n  employeesByJobGrade(jobGrade:CuteEngineer){\r\n    id\r\n    firstName\r\n    lastName\r\n    jobGrade\r\n  }\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e9e0850d-ee1c-4335-bb2f-9d4f74b2ad90",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Create Employee GraphQL Request\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.createEmployee).not.to.be.empty;\r",
+							"    pm.expect(jsonData.data.createEmployee.id).not.to.be.null;\r",
+							"    pm.expect(jsonData.data.createEmployee.firstName).to.eql(\"John\");\r",
+							"    pm.expect(jsonData.data.createEmployee.lastName).to.eql(\"Doe\");\r",
+							"    pm.expect(jsonData.data.createEmployee.email).to.eql(\"john.doe@citech.com\");\r",
+							"\r",
+							"    pm.variables.set('createdEmployeeId', jsonData.data.createEmployee.id);\r",
+							"    console.log(pm.variables.get(\"createdEmployeeId\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n  createEmployee(companyId:\"CITECH01\", employeeDetails: {firstName:\"John\", lastName:\"Doe\", email:\"john.doe@citech.com\"})\r\n  {\r\n      id\r\n      firstName\r\n      lastName\r\n      email\r\n  }\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c32adbe0-2a7f-40ba-9839-33dbd2716aa8",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Update Employee GraphQL Request\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.updateEmployee).not.to.be.empty;\r",
+							"    pm.expect(jsonData.data.updateEmployee.id).to.eql(\"UPDATEID01\");\r",
+							"    pm.expect(jsonData.data.updateEmployee.firstName).to.eql(\"Jonathan\");\r",
+							"    pm.expect(jsonData.data.updateEmployee.lastName).to.eql(\"Wick\");\r",
+							"    pm.expect(jsonData.data.updateEmployee.email).to.eql(\"jon.wick@citech.com\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e5ec9003-0cc4-4301-b9f9-84078c541b25",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n  updateEmployee(id:\"UPDATEID01\", employeeDetails: {firstName:\"Jonathan\", lastName:\"Wick\", email:\"jon.wick@citech.com\"})\r\n  {\r\n      id\r\n      firstName\r\n      lastName\r\n      email\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"{{createdEmployeeId}}\"\r\n}"
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "38f5b8df-a19f-4b31-9236-664125ee0b2d",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Delete Employee GraphQL Request\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.deleteEmployee).not.to.be.empty;\r",
+							"    pm.expect(jsonData.data.deleteEmployee.id).to.eql(\"DELETEID01\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2304c55b-a90e-444d-985f-21fe43faadc0",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n  deleteEmployee(id:\"DELETEID01\")\r\n  {\r\n      id\r\n      firstName\r\n      lastName\r\n      email\r\n  }\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "**NOTE: Once you delete an employee it will no longer exist in the DB**"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Company",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "708db2be-d1c3-4f89-bd3b-03e517ade212",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Create Company GraphQL Request\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.createCompany).not.to.be.empty;\r",
+							"    pm.expect(jsonData.data.createCompany.id).not.to.be.null;\r",
+							"    pm.expect(jsonData.data.createCompany.name).to.eql(\"CINC\");\r",
+							"    pm.expect(jsonData.data.createCompany.location).to.eql(\"Japan\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n  createCompany(companyDetails: {name:\"CINC\", location:\"Japan\"})\r\n  {\r\n      id\r\n      name\r\n      location      \r\n  }\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Company",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "66e66dfe-b9ad-4ed4-991a-d32414343d17",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Update Company GraphQL Request\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.updateCompany).not.to.be.empty;\r",
+							"    pm.expect(jsonData.data.updateCompany.id).to.eql(\"UPDATECOMP01\");\r",
+							"    pm.expect(jsonData.data.updateCompany.name).to.eql(\"CEL Update\");\r",
+							"    pm.expect(jsonData.data.updateCompany.location).to.eql(\"3TS Building\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n  updateCompany(id:\"UPDATECOMP01\", companyDetails: {name:\"CEL Update\", location:\"3TS Building\"})\r\n  {\r\n      id\r\n      name\r\n      location      \r\n  }\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Company",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aee69e0e-693d-470b-af44-4d5ea990da52",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Delete Company GraphQL Request\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.deleteCompany).not.to.be.empty;\r",
+							"    pm.expect(jsonData.data.deleteCompany.id).to.eql(\"DELETECOMP01\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n  deleteCompany(id:\"DELETECOMP01\")\r\n  {\r\n      id\r\n      name\r\n      location      \r\n  }\r\n}",
 						"variables": ""
 					},
 					"options": {

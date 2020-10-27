@@ -1,74 +1,88 @@
 [
-   {
-      "id": "EMP001",
-      "firstName":"Nick",
-      "lastName":"Schrock",
-      "email": "Nick.Schrock@canon-europe.com",
-      "weight": 75.9,
-      "tenure": 15,
-      "isWfh": true,
-      "jobGrade": "Manager",
-      "companyId": "CEL001",
-      "userName": "nick.schrock"
-   },
-   {
-      "id": "EMP002",
-      "firstName":"Dan",
-      "lastName":"Schafer",
-      "email": "Dan.Schafer@canon-europe.com",
-      "weight": 72.3,
-      "tenure": 12,
-      "isWfh": true,
-      "jobGrade": "PrincipalEngineer",
-      "companyId": "CEL001",
-      "userName": "dan.schafer"
-   },
-   {
-      "id": "EMP003",
-      "firstName":"Lee",
-      "lastName":"Byron",
-      "email": "Lee.Byron@canon-europe.com",
-      "weight": 77.6,
-      "tenure": 11,
-      "isWfh": false,
-      "jobGrade": "SeniorEngineer",
-      "companyId": "CEL001",
-      "userName": "lee.byron"
-   },
-   {
-      "id": "EMP004",
-      "firstName":"Roy",
-      "lastName":"Fielding",
-      "email": "Roy.Fielding@canon-europe.com",
-      "weight": 59.2,
-      "tenure": 12,
-      "isWfh": false,
-      "jobGrade": "JuniorEngineer",
-      "companyId": "CITECH01",
-      "userName": "roy.fielding"
-   },
-   {
-      "id": "EMP005",
-      "firstName":"Jonathan",
-      "lastName":"Estilo",
-      "email": "jonathan.estilo@canon-europe.com",
-      "weight": 69.0,
-      "tenure": 2,
-      "isWfh": true,
-      "jobGrade": "PrincipalEngineer",
-      "companyId": "CITECH01",
-      "userName": "jonathan.estilo"
-   },
-   {
-      "id": "EMP006",
-      "firstName":"Lorvin",
-      "lastName":"de la Cruz",
-      "email": "lorvin.delacruz@canon-europe.com",
-      "weight": 103.5,
-      "tenure": 2,
-      "isWfh": true,
-      "jobGrade": "CuteEngineer",
-      "companyId": "CITECH01",
-      "userName": "lorvin.de.la.cruz"
-   }
+  {
+    "id": "EMP001",
+    "firstName": "Nick",
+    "lastName": "Schrock",
+    "email": "Nick.Schrock@canon-europe.com",
+    "weight": 75.9,
+    "tenure": 15,
+    "isWfh": true,
+    "jobGrade": "Manager",
+    "companyId": "CEL001",
+    "userName": "nick.schrock"
+  },
+  {
+    "id": "EMP002",
+    "firstName": "Dan",
+    "lastName": "Schafer",
+    "email": "Dan.Schafer@canon-europe.com",
+    "weight": 72.3,
+    "tenure": 12,
+    "isWfh": true,
+    "jobGrade": "PrincipalEngineer",
+    "companyId": "CEL001",
+    "userName": "dan.schafer"
+  },
+  {
+    "id": "EMP003",
+    "firstName": "Lee",
+    "lastName": "Byron",
+    "email": "Lee.Byron@canon-europe.com",
+    "weight": 77.6,
+    "tenure": 11,
+    "isWfh": false,
+    "jobGrade": "SeniorEngineer",
+    "companyId": "CEL001",
+    "userName": "lee.byron"
+  },
+  {
+    "id": "EMP004",
+    "firstName": "Roy",
+    "lastName": "Fielding",
+    "email": "Roy.Fielding@canon-europe.com",
+    "weight": 59.2,
+    "tenure": 12,
+    "isWfh": false,
+    "jobGrade": "JuniorEngineer",
+    "companyId": "CITECH01",
+    "userName": "roy.fielding"
+  },
+  {
+    "id": "EMP005",
+    "firstName": "Jonathan",
+    "lastName": "Estilo",
+    "email": "jonathan.estilo@canon-europe.com",
+    "weight": 69,
+    "tenure": 2,
+    "isWfh": true,
+    "jobGrade": "PrincipalEngineer",
+    "companyId": "CITECH01",
+    "userName": "jonathan.estilo"
+  },
+  {
+    "id": "EMP006",
+    "firstName": "Lorvin",
+    "lastName": "de la Cruz",
+    "email": "lorvin.delacruz@canon-europe.com",
+    "weight": 103.5,
+    "tenure": 2,
+    "isWfh": true,
+    "jobGrade": "CuteEngineer",
+    "companyId": "CITECH01",
+    "userName": "lorvin.de.la.cruz"
+  },
+  {
+    "id": "UPDATEID01",
+    "firstName": "Jonathan",
+    "lastName": "Wick",
+    "companyId": "CITECH01",
+    "email": "jon.wick@citech.com"
+  },
+  {
+    "id": "DELETEID01",
+    "firstName": "DeleteFirst",
+    "lastName": "DeleteLast",
+    "companyId": "CITECH01",
+    "email": "delete@citech.com"
+  }
 ]
