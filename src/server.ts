@@ -17,16 +17,12 @@ const main = async () => {
 
     const schema = await createSchema();
 
-    const graphqlServer = graphqlHTTP(async () => {
-        const context = createContext();
-        
-        return {
-            schema,
-            graphiql: true,
-            context,
-            customFormatErrorFn: formatError
-        };
-    });
+    const graphqlServer = graphqlHTTP(async () => ({
+        schema,
+        graphiql: true,
+        context: createContext(),
+        customFormatErrorFn: formatError
+    }));
 
     app.use("*", cors());
     app.use(compression());

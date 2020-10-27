@@ -7,7 +7,7 @@
 type Mutation {
     # Mutations related to company
 
-    # Input types: (see `./4-inputTypes.graphql`)
+    # Input types (see `./4-inputTypes.graphql`)
     createCompany(companyDetails: CompanyInput): Company
     updateCompany(id: ID!, companyDetails: CompanyInput): Company
     deleteCompany(id: ID!): Company

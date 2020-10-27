@@ -1,6 +1,6 @@
 import { GraphQLSchema } from "graphql";
 import { addResolversToSchema, GraphQLFileLoader, loadSchema } from "graphql-tools";
-import SchemaResolver from "../resolvers/SchemaResolver";
+import SchemaResolver from "../resolvers/SchemaResolvers";
 
 /**
  * Helper function to read GraphQL Schema files and
