@@ -1,0 +1,6 @@
+# Custom scalar types
+#     - Up to our implementation to define
+#       how that type should be serialized,
+#       deserialized, and validated
+
+scalar DateTime

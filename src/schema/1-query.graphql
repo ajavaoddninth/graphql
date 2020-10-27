@@ -1,0 +1,70 @@
+# Query type
+#     - Every GraphQL service has a `query` type
+#     - Define the entry point of every GraphQL query
+#     - Read more: https://graphql.org/learn/schema/#the-query-and-mutation-types
+
+type Query {
+    # Scalar types
+    #     - Represent concrete data (leaves) of a query
+    #     - Read more: https://graphql.org/learn/schema/#scalar-types
+
+    # String
+    #     - A UTF-8 character sequence
+    # Non-null
+    #     - Always expect to return a non-null value
+    #     - Mark with an exclamation mark after the type name
+    helloWorld: String!
+    
+    serverComponents: String
+
+    # Int
+    #     - A signed 32-bit integer
+    thisIsAnInt: Int
+
+    # Float
+    #     - A signed double-precision floating-point value
+    thisIsAFloat: Float
+
+    # Boolean
+    #     - `true` or `false`
+    thisIsABoolean: Boolean
+
+    # ID
+    #     - Represents a unique ID, used to refetch an object or key for cache
+    #     - Serialized in the same way as string
+    thisIsAnId: ID
+
+    # Enum type (see `./5-enumerations.graphql`)
+    thisIsAnEnum: JobGrade
+
+    # Lists
+    #     - Returns an array of specific type
+    #     - Denote by wrapping the type in square brackets
+    thisIsAList: [String]
+
+    # Query related to companies
+    companies: [Company]
+
+    # Arguments
+    #     - Every field and nested object can have arguments
+    #     - Read more: https://graphql.org/learn/queries/#arguments
+    company(id: ID): Company
+
+    # Query related to employees
+    employees: [Employee]
+    employeeById(id: ID!): Employee
+    employeeByName(name: String!): Employee
+    employeesTenureLessThan(tenure: Int): [Employee]
+    employeesByJobGrade(jobGrade: JobGrade): [Employee]
+    employee(id: ID, firstName: String): Employee
+    employeeByUserName(userName: String): Employee
+
+    # Query related to polls
+    pollsByCompanyId(companyId: ID!): [Poll]
+
+    # Query related to options
+    optionsByPollId(pollId: ID!): [PollOption]
+
+    # Query related to votes
+    vote(employeeId: ID!, pollId: ID!): Vote
+}

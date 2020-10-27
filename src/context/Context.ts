@@ -11,6 +11,11 @@ import Poll from "../entities/Poll";
 import PollOption from "../entities/PollOption";
 import Vote from "../entities/Vote";
 
+/**
+ * Context used to provide access to the entity data sources.
+ * This should be available to all resolver functions.
+ * DO NOT MODIFY.
+ */
 export default interface Context {
     companies: DataSource<Company>;
     employees: DataSource<Employee>;
@@ -19,6 +24,11 @@ export default interface Context {
     votes: DataSource<Vote>;
 }
 
+
+/**
+ * Helper function to create the context.
+ * DO NOT MODIFY.
+ */
 export function createContext(): Context {
     const store = new DataStore('./src/datastore');
 

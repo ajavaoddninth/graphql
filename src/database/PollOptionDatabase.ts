@@ -3,6 +3,10 @@ import PollOption from "../entities/PollOption";
 import Vote from "../entities/Vote";
 import AbstractDatabase from "./AbstractDatabase";
 
+/**
+ * `notarealdb` Poll Option Database.
+ * DO NOT MODIFY.
+ */
 export default class PollOptionDatabase extends AbstractDatabase<PollOption> {
     constructor (
         pollOptions: Collection<PollOption>,
@@ -11,15 +15,18 @@ export default class PollOptionDatabase extends AbstractDatabase<PollOption> {
         super(pollOptions);
     }
     
-    public delete(id: string): PollOption {
-        const pollOptionToDelete = this.rootCollection.get(id);
+    /** @inheritdoc */
+    public delete(id: string): PollOption | undefined {
+        const pollOptionToDelete = this.get(id);
 
-        this.rootCollection.delete(id);
+        if (pollOptionToDelete) {
+            this.rootCollection.delete(id);
 
-        this.voteDb
-            .filter(item => item.optionId === id)
-            .map(item => this.voteDb.delete(item.id));
-
+            this.voteDb
+                .filter(item => item.optionId === id)
+                .map(item => this.voteDb.delete(item.id));
+        }
+        
         return pollOptionToDelete;
     }
 }

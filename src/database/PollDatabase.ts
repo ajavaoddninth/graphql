@@ -4,6 +4,10 @@ import PollOption from "../entities/PollOption";
 import Vote from "../entities/Vote";
 import AbstractDatabase from "./AbstractDatabase";
 
+/**
+ * `notarealdb` Poll Database.
+ * DO NOT MODIFY.
+ */
 export default class PollDatabase extends AbstractDatabase<Poll> {
     constructor(
         polls: Collection<Poll>,
@@ -13,18 +17,21 @@ export default class PollDatabase extends AbstractDatabase<Poll> {
         super(polls);
     }
     
-    public delete(id: string): Poll {
-        const pollToDelete = this.rootCollection.get(id);
+    /** @inheritdoc */
+    public delete(id: string): Poll | undefined {
+        const pollToDelete = this.get(id);
 
-        this.rootCollection.delete(id);
+        if (pollToDelete) {
+            this.rootCollection.delete(id);
 
-        this.pollOptionDb
-            .filter(item => item.pollId === id)
-            .map(item => this.pollOptionDb.delete(item.id));
+            this.pollOptionDb
+                .filter(item => item.pollId === id)
+                .map(item => this.pollOptionDb.delete(item.id));
 
-        this.voteDb
-            .filter(item => item.pollId === id)
-            .map(item => this.voteDb.delete(item.id));
+            this.voteDb
+                .filter(item => item.pollId === id)
+                .map(item => this.voteDb.delete(item.id));
+        }
 
         return pollToDelete;
     }

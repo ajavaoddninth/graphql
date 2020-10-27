@@ -1,0 +1,17 @@
+# Input types
+#     - You can pass complex object as arguments to a
+#       field using input types
+#     - Can't use object (output) types as an argument
+#     - Can't have arguments on input type fields
+#     - Read more: https://graphql.org/learn/schema/#input-types
+
+input EmployeeInput {
+    firstName: String
+    lastName: String
+    email: String
+}
+
+input CompanyInput {
+    name: String
+    location: String
+}

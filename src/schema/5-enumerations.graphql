@@ -1,0 +1,12 @@
+# Enumeration types
+#     - Special scalar types
+#     - Restricted to a particular set of allowed values
+#     - Read more: https://graphql.org/learn/schema/#enumeration-types
+
+enum JobGrade {
+    Manager
+    PrincipalEngineer
+    SeniorEngineer
+    JuniorEngineer
+    CuteEngineer
+}

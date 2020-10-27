@@ -2,6 +2,10 @@ import { Collection } from "notarealdb";
 import Vote from "../entities/Vote";
 import AbstractDatabase from "./AbstractDatabase";
 
+/**
+ * `notarealdb` Vote Database.
+ * DO NOT MODIFY.
+ */
 export default class VoteDatabase extends AbstractDatabase<Vote> {
     constructor(
         votes: Collection<Vote>
@@ -9,11 +13,14 @@ export default class VoteDatabase extends AbstractDatabase<Vote> {
         super(votes);
     }
     
-    public delete(id: string): Vote {
-        const voteToDelete = this.rootCollection.get(id);
+    /** @inheritdoc */
+    public delete(id: string): Vote | undefined {
+        const voteToDelete = this.get(id);
 
-        this.rootCollection.delete(id);
-
+        if (voteToDelete) {
+            this.rootCollection.delete(id);
+        }
+        
         return voteToDelete;
     }
 }

@@ -1,0 +1,47 @@
+# Object types
+#     - The most basic component of a GraphQL schema
+#     - Represents a kind of object you can fetch from
+#       your service, and what fields it has
+#     - aka Output Types
+#     - Read more: https://graphql.org/learn/schema/#object-types-and-fields
+
+type Company {
+    id: ID!
+    name: String
+    location: String
+
+    # Fields can be object types so that you can query nested objects
+    employees: [Employee]
+}
+
+type Employee {
+    id: ID!
+    firstName: String
+    lastName: String
+    email: String
+    companyId: String
+    weight: Float
+    tenure: Int
+    isWfh: Boolean
+    jobGrade: JobGrade
+}
+
+type Poll {
+    id: ID!
+    title: String
+    createdByEmployeeId: ID!
+    createdByEmployee: Employee
+    createdDate: DateTime
+}
+
+type PollOption {
+    id: ID!
+    option: String
+    tally: Int
+}
+
+type Vote {
+    employeeId: ID
+    pollId: ID
+    optionId: ID
+}

@@ -4,7 +4,14 @@ import compression from "compression";
 import { graphqlHTTP } from "express-graphql";
 import { createSchema } from "./schema/Schema";
 import { createContext } from "./context/Context";
+import formatError from "./errors/FormatError";
 
+const PORT = 4000;
+
+/**
+ * Main function for the GraphQL Server.
+ * DO NOT MODIFY.
+ */
 const main = async () => {
     const app = express();
 
@@ -16,7 +23,8 @@ const main = async () => {
         return {
             schema,
             graphiql: true,
-            context
+            context,
+            customFormatErrorFn: formatError
         };
     });
 
@@ -27,8 +35,8 @@ const main = async () => {
         graphqlServer
     );
     
-    app.listen(4000, () => {
-        console.log(`Server started on http://localhost:4000/graphql`);
+    app.listen(PORT, () => {
+        console.log(`Server started on http://localhost:${PORT}/graphql`);
     });
 };
 

@@ -4,6 +4,10 @@ import Poll from "../entities/Poll";
 import Vote from "../entities/Vote";
 import AbstractDatabase from "./AbstractDatabase";
 
+/**
+ * `notarealdb` Employee Database.
+ * DO NOT MODIFY.
+ */
 export default class EmployeeDatabase extends AbstractDatabase<Employee> {
     constructor(
         employees: Collection<Employee>,
@@ -13,18 +17,21 @@ export default class EmployeeDatabase extends AbstractDatabase<Employee> {
         super(employees);
     }
     
-    public delete(id: string): Employee {
-        const employeeToDelete = this.rootCollection.get(id);
+    /** @inheritdoc */
+    public delete(id: string): Employee | undefined {
+        const employeeToDelete = this.get(id);
 
-        this.rootCollection.delete(id);
+        if (employeeToDelete) {
+            this.rootCollection.delete(id);
 
-        this.pollDb
-            .filter(item => item.createdByEmployeeId === id)
-            .map(item => this.pollDb.delete(item.id));
+            this.pollDb
+                .filter(item => item.createdByEmployeeId === id)
+                .map(item => this.pollDb.delete(item.id));
 
-        this.voteDb
-            .filter(item => item.employeeId === id)
-            .map(item => this.voteDb.delete(item.id));
+            this.voteDb
+                .filter(item => item.employeeId === id)
+                .map(item => this.voteDb.delete(item.id));
+        }
 
         return employeeToDelete;
     }

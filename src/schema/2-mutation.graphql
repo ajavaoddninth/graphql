@@ -1,0 +1,31 @@
+# Mutation type
+#     - GraphQL's way to modify server-side data
+#     - Every GraphQL service may or may not have a `mutation` type
+#     - Also defines an entry point
+#     - Read more: https://graphql.org/learn/queries/#mutations
+
+type Mutation {
+    # Mutations related to company
+
+    # Input types: (see `./4-inputTypes.graphql`)
+    createCompany(companyDetails: CompanyInput): Company
+    updateCompany(id: ID!, companyDetails: CompanyInput): Company
+    deleteCompany(id: ID!): Company
+
+    # Mutations related to employee
+    createEmployee(companyId: ID!, employeeDetails: EmployeeInput): Employee
+    updateEmployee(id: ID!, employeeDetails: EmployeeInput): Employee
+    deleteEmployee(id: ID!): Employee
+
+    # Mutations related to polls
+    createPoll(companyId: ID!, title: String!, createdByEmployeeId: ID!): Poll
+    deletePoll(id: ID!): Poll
+
+    # Mutations related to poll options
+    createPollOption(pollId: ID!, option: String!): PollOption
+    deletePollOption(id: ID!): PollOption
+
+    # Mutations related to votes
+    sendVote(employeeId: ID!, pollId: ID!, optionId: ID!): Vote
+    discardVote(employeeId: ID!, pollId: ID!): Vote
+}
