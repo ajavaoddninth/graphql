@@ -13,14 +13,14 @@ type Mutation {
     deleteEmployee(id: ID!): Employee
 
     # Mutations related to polls
-    createPoll(companyId: ID!, title: String!, createdByEmployeeId: ID!): Poll
-    deletePoll(id: ID!): Poll
+    createPoll(companyId: ID!, title: String!, createdByEmployeeId: ID!): Poll # [PART 2]
+    deletePoll(id: ID!): Poll # [PART 2]
 
     # Mutations related to poll options
-    createPollOption(pollId: ID!, option: String!): PollOption
-    deletePollOption(id: ID!): PollOption
+    createPollOption(pollId: ID!, option: String!): PollOption # [PART 2]
+    deletePollOption(id: ID!): PollOption # [PART 2]
 
     # Mutations related to votes
-    sendVote(employeeId: ID!, pollId: ID!, optionId: ID!): Vote
-    discardVote(employeeId: ID!, pollId: ID!): Vote
+    sendVote(employeeId: ID!, pollId: ID!, optionId: ID!): Vote # [PART 2]
+    discardVote(employeeId: ID!, pollId: ID!): Vote # [PART 2]
 }

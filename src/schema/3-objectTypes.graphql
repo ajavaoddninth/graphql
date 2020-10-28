@@ -31,14 +31,14 @@ type Poll {
     id: ID!
     title: String
     createdByEmployeeId: ID!
-    createdByEmployee: Employee
+    createdByEmployee: Employee # [PART 2]
     createdDate: DateTime
 }
 
 type PollOption {
     id: ID!
     option: String
-    tally: Int
+    tally: Int # [PART 2]
 }
 
 type Vote {

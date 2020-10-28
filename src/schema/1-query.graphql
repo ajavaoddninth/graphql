@@ -40,14 +40,14 @@ type Query {
     employees: [Employee]
     employeeById(id: ID!): Employee
     employeesByJobGrade(jobGrade: JobGrade): [Employee]
-    employeeByUserName(userName: String): Employee
+    employeeByUserName(userName: String): Employee # [PART 2]
 
     # Query related to polls
-    pollsByCompanyId(companyId: ID!): [Poll]
+    pollsByCompanyId(companyId: ID!): [Poll] # [PART 2]
 
     # Query related to options
-    optionsByPollId(pollId: ID!): [PollOption]
+    optionsByPollId(pollId: ID!): [PollOption] # [PART 2]
 
     # Query related to votes
-    vote(employeeId: ID!, pollId: ID!): Vote
+    vote(employeeId: ID!, pollId: ID!): Vote # [PART 2]
 }
