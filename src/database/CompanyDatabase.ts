@@ -6,7 +6,6 @@ import AbstractDatabase from "./AbstractDatabase";
 
 /**
  * `notarealdb` Company Database.
- * DO NOT MODIFY.
  */
 export default class CompanyDatabase extends AbstractDatabase<Company> {
     constructor(

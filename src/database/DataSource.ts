@@ -1,6 +1,5 @@
 /**
  * Function interface for entity conditions.
- * DO NOT MODIFY.
  */
 export interface Predicate<TEntity> {
     (entity: TEntity): boolean;
@@ -8,7 +7,6 @@ export interface Predicate<TEntity> {
 
 /**
  * Function interface for entity comparers.
- * DO NOT MODIFY.
  */
 export interface Comparer<TEntity> {
     (first: TEntity, second: TEntity): number;
@@ -16,7 +14,6 @@ export interface Comparer<TEntity> {
 
 /**
  * Class interface for sources of entity data.
- * DO NOT MODIFY.
  */
 export default interface DataSource<TEntity> {
     /**

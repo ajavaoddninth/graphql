@@ -7,14 +7,17 @@ import PollOptionResolvers from "./PollOptionResolvers";
 import PollResolvers from "./PollResolvers";
 import VoteResolvers from "./VoteResolvers";
 
-// Resolver for the custom scalar types.
-// DO NOT MODIFY.
+/**
+ * Resolver for the custom scalar types
+ */
 const CustomScalarResolvers: IResolvers = {
     DateTime: GraphQLDateTime
 };
 
-// Merge all defined resolvers into one big schema resolver.
-// DO NOT MODIFY.
+/**
+ * Resolver implementations can be separated across multiple objects
+ * and then merged into one big schema resolvers object.
+ */
 export default mergeResolvers([
     BasicResolvers,
     CompanyResolvers,

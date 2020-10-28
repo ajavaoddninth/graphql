@@ -4,7 +4,6 @@ import AbstractDatabase from "./AbstractDatabase";
 
 /**
  * `notarealdb` Vote Database.
- * DO NOT MODIFY.
  */
 export default class VoteDatabase extends AbstractDatabase<Vote> {
     constructor(

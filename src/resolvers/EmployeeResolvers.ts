@@ -10,27 +10,68 @@ const EMAIL_PATTERN = /^(?:i)(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*
  * Resolvers of fields related to employees
  */
 const EmployeeResolvers: IResolvers = {
+    // Resolvers for Query type
     Query: {
+        /**
+         * Returns all the working employees regardless
+         * of company.
+         * @param _ Ignored root object
+         * @param __ Ignored argument object
+         * @param context Context to access database
+         */
         employees: (_, __, context: Context): Employee[] => {
             return context.employees.list();
         },
 
+        /**
+         * Returns a single employee by ID.
+         * @param _ Ignored root object
+         * @param args Arguments containing ID
+         * @param context Context to access database
+         */
         employeeById: (_, args: { id: string }, context: Context): Employee | undefined => {
             return context.employees.get(args.id);
         },
 
+        /**
+         * Returns a single employee by full name,
+         * if found.
+         * @param _ Ignored root object
+         * @param args Arguments containing full name
+         * @param context Context to access database
+         */
         employeeByName: (_, args: { name: string }, context: Context): Employee | undefined => {
             return context.employees.find(item => `${item.firstName} ${item.lastName}` === args.name);
         },
 
+        /**
+         * Returns all employees with tenure less than
+         * provided year.
+         * @param _ Ignored root object
+         * @param args Arguments containing year
+         * @param context Context to access database
+         */
         employeesTenureLessThan: (_, args: { tenure: number }, context: Context): Employee[] => {
             return context.employees.filter(item => item.tenure < args.tenure);
         },
 
+        /**
+         * Returns all employees with given job grade.
+         * @param _ Ignored root object
+         * @param args Arguments containing job grade
+         * @param context Context to access database
+         */
         employeesByJobGrade: (_, args: { jobGrade: JobGrade }, context: Context): Employee[] => {
             return context.employees.filter(item => item.jobGrade === args.jobGrade);
         },
 
+        /**
+         * Finds an employee using the ID or first name,
+         * and returns it if found.
+         * @param _ Ignored root object
+         * @param args Arguments containing ID or first name
+         * @param context Context to access database
+         */
         employee:(_, args: { id: string, firstName: string }, context: Context): Employee | undefined => {
             if (args.id) {
                 return context.employees.get(args.id);
@@ -43,6 +84,12 @@ const EmployeeResolvers: IResolvers = {
             }
         },
 
+        /**
+         * Returns a single employee with given user name.
+         * @param _ Ignored root object
+         * @param args Arguments containing the user name
+         * @param context Context to access database
+         */
         employeeByUserName: (_, args: { userName: string }, context: Context): Employee => {
             const employee = context.employees.find(item => item.userName === args.userName);
 
@@ -54,7 +101,16 @@ const EmployeeResolvers: IResolvers = {
         },
     },
 
+    // Resolvers for Mutation type
     Mutation: {
+
+        /**
+         * Creates an employee with given company ID and
+         * other details, and returns it.
+         * @param _ Ignored root object
+         * @param args Arguments containing company ID and other details
+         * @param context Context to access database
+         */
         createEmployee: (_, args: { companyId: string, employeeDetails: EmployeeInput }, context: Context): Employee => {
             const validationErrors: { [key: string]: string } = {};
             
@@ -97,6 +153,13 @@ const EmployeeResolvers: IResolvers = {
             });
         },
 
+        /**
+         * Updates an employee with given ID using the
+         * given details, and returns it if it exists.
+         * @param _ Ignored root object
+         * @param args Arguments containing ID and update details
+         * @param context Context to access database
+         */
         updateEmployee: (_, args: { id: string, employeeDetails: EmployeeInput }, context: Context): Employee | undefined => {
             const validationErrors: { [key: string]: string } = {};
             
@@ -134,6 +197,13 @@ const EmployeeResolvers: IResolvers = {
             return context.employees.update(args.id, args.employeeDetails);
         },
 
+        /**
+         * Deletes an employee with given ID, and
+         * returns it if it exists.
+         * @param _ Ignored root object
+         * @param args Arguments containing ID
+         * @param context Context to access database
+         */
         deleteEmployee: (_, args: { id: string }, context: Context): Employee | undefined => {
             return context.employees.delete(args.id);
         }

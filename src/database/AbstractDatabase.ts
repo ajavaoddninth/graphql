@@ -2,8 +2,7 @@ import { Collection, Entity } from "notarealdb";
 import DataSource, { Comparer, Predicate } from "./DataSource";
 
 /**
- * Generic `notarealdb` Database
- * DO NOT MODIFY
+ * Generic `notarealdb` Database.
  */
 export default abstract class AbstractDatabase<TEntity extends Entity> implements DataSource<TEntity> {
     constructor(

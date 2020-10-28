@@ -6,7 +6,6 @@ import AbstractDatabase from "./AbstractDatabase";
 
 /**
  * `notarealdb` Poll Database.
- * DO NOT MODIFY.
  */
 export default class PollDatabase extends AbstractDatabase<Poll> {
     constructor(
