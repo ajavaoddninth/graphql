@@ -34,26 +34,22 @@ const EmployeeResolvers: IResolvers = {
         },
 
         /**
-         * Returns a single employee by full name,
+         * [PART 1-06] Returns a single employee by full name,
          * if found.
          * @param _ Ignored root object
          * @param args Arguments containing full name
          * @param context Context to access database
          */
-        employeeByName: (_, args: { name: string }, context: Context): Employee | undefined => {
-            return context.employees.find(item => `${item.firstName} ${item.lastName}` === args.name);
-        },
+        // Put code here
 
         /**
-         * Returns all employees with tenure less than
+         * [PART 1-07] Returns all employees with tenure less than
          * provided year.
          * @param _ Ignored root object
          * @param args Arguments containing year
          * @param context Context to access database
          */
-        employeesTenureLessThan: (_, args: { tenure: number }, context: Context): Employee[] => {
-            return context.employees.filter(item => item.tenure < args.tenure);
-        },
+        // Put code here
 
         /**
          * Returns all employees with given job grade.
@@ -66,44 +62,25 @@ const EmployeeResolvers: IResolvers = {
         },
 
         /**
-         * Finds an employee using the ID or first name,
+         * [PART 1-09] Finds an employee using the ID or first name,
          * and returns it if found.
          * @param _ Ignored root object
          * @param args Arguments containing ID or first name
          * @param context Context to access database
          */
-        employee:(_, args: { id: string, firstName: string }, context: Context): Employee | undefined => {
-            if (args.id) {
-                return context.employees.get(args.id);
-            }
-            else if (args.firstName) {
-                return context.employees.find(item => item.firstName === args.firstName);
-            }
-            else {
-                return undefined;
-            }
-        },
+        // Put code here
 
         /**
-         * Returns a single employee with given user name.
+         * [PART 2] Returns a single employee with given user name.
          * @param _ Ignored root object
          * @param args Arguments containing the user name
          * @param context Context to access database
          */
-        employeeByUserName: (_, args: { userName: string }, context: Context): Employee => {
-            const employee = context.employees.find(item => item.userName === args.userName);
-
-            if (employee === undefined) {
-                throw new Error("Invalid username");
-            }
-
-            return employee;
-        },
+        // Put code here
     },
 
     // Resolvers for Mutation type
     Mutation: {
-
         /**
          * Creates an employee with given company ID and
          * other details, and returns it.

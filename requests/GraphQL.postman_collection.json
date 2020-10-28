@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Hello World",
+			"name": "01 - Hello World",
 			"event": [
 				{
 					"listen": "test",
@@ -32,7 +32,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "# Update query to get \"Hello world!\"\r\n# Check the schema on how to get the value\r\n\r\n{\r\n    helloWorld\r\n}",
+						"query": "# Update query to get \"Hello world!\"\r\n# Check the schema on how to get the value",
 						"variables": ""
 					},
 					"options": {
@@ -62,7 +62,7 @@
 			"response": []
 		},
 		{
-			"name": "GraphQL Server-Side Components",
+			"name": "02 - GraphQL Server-Side Components",
 			"event": [
 				{
 					"listen": "test",
@@ -118,7 +118,7 @@
 			"response": []
 		},
 		{
-			"name": "GraphQL Default Scalar Types",
+			"name": "03 - GraphQL Default Scalar Types",
 			"event": [
 				{
 					"listen": "test",
@@ -162,7 +162,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "# Update query, schema, and resolver to return the following:\r\n# * thisIsAnInt: returns 19\r\n# * thisIsAFloat: returns 712.94\r\n# * thisIsABoolean: returns true\r\n# * thisIsAnId: returns \"ID00001\"\r\n# * thisIsAnEnum: returns JobGrade.M1 (\"Manager\")\r\n# * thisIsAList: returns [ \"Hello\", \"world\", \"!\" ]\r\n\r\n{\r\n    thisIsAnInt\r\n    thisIsAFloat\r\n    thisIsABoolean\r\n    thisIsAnId\r\n    thisIsAnEnum\r\n    thisIsAList\r\n}",
+						"query": "# Update query, schema, and resolver to return the following:\r\n# * thisIsAnInt: returns 19\r\n# * thisIsAFloat: returns 712.94\r\n# * thisIsABoolean: returns true\r\n# * thisIsAnId: returns \"ID00001\"\r\n# * thisIsAnEnum: returns JobGrade.M1 (\"Manager\")\r\n# * thisIsAList: returns [ \"Hello\", \"world\", \"!\" ]",
 						"variables": ""
 					},
 					"options": {
@@ -192,7 +192,7 @@
 			"response": []
 		},
 		{
-			"name": "GraphQL Object Type",
+			"name": "04 - GraphQL Object Type",
 			"event": [
 				{
 					"listen": "test",
@@ -230,7 +230,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "# Update query to get all employees with following fields:\r\n# - id\r\n# - firstName\r\n# - lastName\r\n# - email\r\n# - companyId\r\n# - weight\r\n# - tenure\r\n# - isWfh\r\n# Check the schema and resolvers on how to get the list of employees\r\n\r\n{\r\n    employees {\r\n        id\r\n        firstName\r\n        lastName\r\n        email\r\n        companyId\r\n        weight\r\n        tenure\r\n        isWfh\r\n    }\r\n}",
+						"query": "# Update query to get all employees with following fields:\r\n# - id\r\n# - firstName\r\n# - lastName\r\n# - email\r\n# - companyId\r\n# - weight\r\n# - tenure\r\n# - isWfh\r\n# Check the schema and resolvers on how to get the list of employees",
 						"variables": ""
 					},
 					"options": {
@@ -260,7 +260,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Employee By ID",
+			"name": "05 - Get Employee By ID",
 			"event": [
 				{
 					"listen": "test",
@@ -288,7 +288,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "# Update query to get employee with ID \"EMP005\" and return the following fields:\r\n# - id\r\n# - firstName\r\n# - lastName\r\n# Check the schema on how to get an employee by ID\r\n\r\n{\r\n  employeeById(id:\"EMP005\") {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
+						"query": "# Update query to get employee with ID \"EMP005\" and return the following fields:\r\n# - id\r\n# - firstName\r\n# - lastName\r\n# Check the schema on how to get an employee by ID",
 						"variables": ""
 					},
 					"options": {
@@ -317,7 +317,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Employee By Name",
+			"name": "06 - Get Employee By Name",
 			"event": [
 				{
 					"listen": "test",
@@ -374,7 +374,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Employees Tenure Less Than",
+			"name": "07 - Get Employees Tenure Less Than",
 			"event": [
 				{
 					"listen": "test",
@@ -402,7 +402,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "# Update query, schema and resolver to get a list of employees with tenure less than 12,\r\n# and get the following fields:\r\n# - id\r\n# - firstName\r\n# - lastName\r\n# - tenure\r\n# Use `employeesTenureLessThan` as the new field under Query type\r\n# and `tenure` as the argument.\r\n\r\n{\r\n  employeesTenureLessThan(tenure:12) {\r\n    id\r\n    firstName\r\n    lastName\r\n    tenure\r\n  }\r\n}",
+						"query": "# Update query, schema and resolver to get a list of employees with tenure less than 12,\r\n# and get the following fields:\r\n# - id\r\n# - firstName\r\n# - lastName\r\n# - tenure\r\n# Use `employeesTenureLessThan` as the new field under Query type\r\n# and `tenure` as the argument.",
 						"variables": ""
 					},
 					"options": {
@@ -431,7 +431,66 @@
 			"response": []
 		},
 		{
-			"name": "Get Employee With Multiple Optional Arguments",
+			"name": "08 - Get Employees By Job Grade",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "45842f24-6efb-4cd2-8d93-938f8f8613c6",
+						"exec": [
+							"pm.test(\"Status code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get Employees By Job Grade\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.employeesByJobGrade).not.to.be.empty;\r",
+							"    pm.expect(jsonData.data.employeesByJobGrade[0].id).to.eql(\"EMP006\");\r",
+							"    pm.expect(jsonData.data.employeesByJobGrade[0].firstName).to.eql(\"Lorvin\");\r",
+							"    pm.expect(jsonData.data.employeesByJobGrade[0].lastName).to.eql(\"de la Cruz\");\r",
+							"    pm.expect(jsonData.data.employeesByJobGrade[0].jobGrade).to.eql(\"CuteEngineer\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "# Update query to get a `CuteEngineer` employee with the following fields:\r\n# * id\r\n# * firstName\r\n# * lastName\r\n# * jobGrade\r\n# Check the schema on how to get an employee by job grade ",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{graphql_endpoint}}/graphql",
+					"host": [
+						"{{graphql_endpoint}}"
+					],
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "09 - Get Employee With Multiple Optional Arguments",
 			"event": [
 				{
 					"listen": "test",
@@ -463,7 +522,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "# Update schema and resolvers to get an employee by ID or first name.\r\n# Use a single field `employee` under Query type with optional arguments\r\n# `id` and `firstName`.\r\n\r\n{\r\n  # You can rename fields in queries\r\n  emp003Employee: employee(id:\"EMP003\") {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n  # You can rename fields in queries\r\n  leeEmployee: employee(firstName:\"Lee\") {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
+						"query": "# Update schema and resolver to get an employee by ID or first name.\r\n# Use a single field `employee` under Query type with optional arguments\r\n# `id` and `firstName`.\r\n\r\n{\r\n  # You can rename fields in queries\r\n  emp003Employee: employee(id:\"EMP003\") {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n  # You can rename fields in queries\r\n  leeEmployee: employee(firstName:\"Lee\") {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -492,7 +551,67 @@
 			"response": []
 		},
 		{
-			"name": "Named GraphQL Request with Variables",
+			"name": "10 - Get Nested Objects In One Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9bf262e9-9587-485f-a85f-45f9b4615188",
+						"exec": [
+							"pm.test(\"Get Nested Objects In One Request\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.company.name).to.eql(\"Canon Information Technologies, Philippines, Inc.\");\r",
+							"    pm.expect(jsonData.data.company.location).to.eql(\"Manila\");\r",
+							"\r",
+							"    pm.expect(jsonData.data.company.employees).to.be.an(\"array\");\r",
+							"\r",
+							"    for (let employee of jsonData.data.company.employees) {\r",
+							"        pm.expect(employee.firstName).to.exist;\r",
+							"        pm.expect(employee.lastName).to.exist;\r",
+							"        pm.expect(employee.jobGrade).to.exist;\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "# Update resolver to get all employees of a company.\r\n# Use a single field `employees` under Company type.\r\n\r\n{\r\n  company(id: \"CITECH01\") {\r\n      name\r\n      location\r\n      employees {\r\n          firstName\r\n          lastName\r\n          jobGrade\r\n      }\r\n  }\r\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{graphql_endpoint}}/graphql",
+					"host": [
+						"{{graphql_endpoint}}"
+					],
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11 - Named GraphQL Request with Variables",
 			"event": [
 				{
 					"listen": "test",
@@ -520,66 +639,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "# This is the syntax for named queries with variables.\r\n# Add a variable `$firstName` to the named query and update the\r\n# `GRAPHQL VARIABLES` tab to put a valid JSON object.\r\n# To construct a named query with variables, check the following:\r\n#     https://graphql.org/learn/queries/#operation-name\r\n#     https://graphql.org/learn/queries/#variables\r\n#     https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql#working-with-graphql-variables\r\n\r\nquery employeeByFirstName($firstName:String) { \r\n  employee(firstName:$firstName) {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
-						"variables": "{\r\n  \"firstName\": \"Jonathan\"\r\n}"
-					},
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{graphql_endpoint}}/graphql",
-					"host": [
-						"{{graphql_endpoint}}"
-					],
-					"path": [
-						"graphql"
-					],
-					"query": [
-						{
-							"key": "test",
-							"value": "test",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Employees By Job Grade",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "45842f24-6efb-4cd2-8d93-938f8f8613c6",
-						"exec": [
-							"pm.test(\"Status code is 200 OK\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Get Employees By Job Grade\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.data.employeesByJobGrade).not.to.be.empty;\r",
-							"    pm.expect(jsonData.data.employeesByJobGrade[0].id).to.eql(\"EMP006\");\r",
-							"    pm.expect(jsonData.data.employeesByJobGrade[0].firstName).to.eql(\"Lorvin\");\r",
-							"    pm.expect(jsonData.data.employeesByJobGrade[0].lastName).to.eql(\"de la Cruz\");\r",
-							"    pm.expect(jsonData.data.employeesByJobGrade[0].jobGrade).to.eql(\"CuteEngineer\");\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "# Update query to get a `CuteEngineer` employee\r\n# Check the schema on how to get an employee by job grade \r\n\r\n{\r\n  employeesByJobGrade(jobGrade:CuteEngineer) {\r\n    id\r\n    firstName\r\n    lastName\r\n    jobGrade\r\n  }\r\n}",
+						"query": "# Update the query to add a variable `$firstName` to the named query and update the\r\n# `GRAPHQL VARIABLES` tab to put a valid JSON object.\r\n# To construct a named query with variables, check the following:\r\n#     https://graphql.org/learn/queries/#operation-name\r\n#     https://graphql.org/learn/queries/#variables\r\n#     https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql#working-with-graphql-variables\r\n\r\nquery employeeByFirstName() { \r\n  employee() {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -608,7 +668,7 @@
 			"response": []
 		},
 		{
-			"name": "Create Employee",
+			"name": "12 - Create Employee",
 			"event": [
 				{
 					"listen": "test",
@@ -641,8 +701,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "# Update mutation to create an employee with following details\r\n# * companyId: \"CITECH01\"\r\n# * firstName: \"John\"\r\n# * lastName: \"Doe\"\r\n# * email: \"john.doe@citech.com\"\r\n# * userName: \"john.doe\"\r\n# Check the schema on how to create an employee.\r\n# As much as possible, use a named mutation with variables.\r\n\r\nmutation CreateEmployee($companyId: ID!, $employeeDetails: EmployeeInput) {\r\n  createEmployee(companyId: $companyId, employeeDetails: $employeeDetails) {\r\n      id\r\n      firstName\r\n      lastName\r\n      email\r\n      userName\r\n  }\r\n}",
-						"variables": "{\r\n    \"companyId\": \"CITECH01\",\r\n    \"employeeDetails\": {\r\n        \"firstName\": \"John\",\r\n        \"lastName\": \"Doe\",\r\n        \"email\": \"john.doe@citech.com\",\r\n        \"userName\": \"john.doe\"\r\n    }\r\n}"
+						"query": "# Update mutation request to create an employee with following details\r\n# * companyId: \"CITECH01\"\r\n# * firstName: \"John\"\r\n# * lastName: \"Doe\"\r\n# * email: \"john.doe@citech.com\"\r\n# * userName: \"john.doe\"\r\n# Check the schema on how to create an employee.\r\n# As much as possible, use a named mutation with variables.\r\n\r\nmutation CreateEmployee($companyId: ID!, $employeeDetails: EmployeeInput) {\r\n}",
+						"variables": ""
 					},
 					"options": {
 						"raw": {
@@ -670,7 +730,7 @@
 			"response": []
 		},
 		{
-			"name": "Update Employee",
+			"name": "13 - Update Employee",
 			"event": [
 				{
 					"listen": "test",
@@ -711,8 +771,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "# Update query to update the employee with the following:\r\n# * firstName: \"Jonathan\"\r\n# * lastName: \"Wick\"\r\n# * email: \"john.wick@citech.com\"\r\n# * userName: \"john.wick\"\r\n# The ID used is the created employee ID stored in Postman collection (no need to change).\r\n# Check the schema on how to update an employee.\r\n# Use a named mutation with variables if possible.\r\n# !!!NOTE!!!: You must successfully run `Create Employee` test first before running this test.\r\n\r\nmutation UpdateEmployee($id: ID!, $employeeDetails: EmployeeInput) {\r\n  updateEmployee(id: $id, employeeDetails: $employeeDetails) {\r\n      id\r\n      firstName\r\n      lastName\r\n      email\r\n      userName\r\n  }\r\n}",
-						"variables": "{\r\n    \"id\": \"{{createdEmployeeId}}\",\r\n    \"employeeDetails\": {\r\n        \"firstName\": \"Jonathan\",\r\n        \"lastName\": \"Wick\",\r\n        \"email\": \"jon.wick@citech.com\",\r\n        \"userName\": \"jon.wick\"\r\n    }\r\n}"
+						"query": "# Update mutation request to update the employee with the following:\r\n# * firstName: \"Jonathan\"\r\n# * lastName: \"Wick\"\r\n# * email: \"john.wick@citech.com\"\r\n# * userName: \"john.wick\"\r\n# The ID used is the created employee ID stored in Postman collection (no need to change).\r\n# Check the schema on how to update an employee.\r\n# Use a named mutation with variables if possible.\r\n# !!!NOTE!!!: You must successfully run `Create Employee` test first before running this test.",
+						"variables": "{\r\n    // Use this as the parameter in your named mutation\r\n    \"id\": \"{{createdEmployeeId}}\"\r\n}"
 					},
 					"options": {
 						"raw": {
@@ -740,7 +800,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete Employee",
+			"name": "14 - Delete Employee",
 			"event": [
 				{
 					"listen": "test",
@@ -778,8 +838,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "# Update query to delete an employee.\r\n# The ID used is the created employee ID stored in Postman collection (no need to change).\r\n# Check the schema on how to delete an employee.\r\n# Use a named mutation with variables if possible.\r\n# !!!NOTE!!!: You must successfully run `Create Employee` test first before running this test.\r\n\r\nmutation DeleteEmployee($id: ID!) {\r\n  deleteEmployee(id: $id) {\r\n      id\r\n      firstName\r\n      lastName\r\n      email\r\n  }\r\n}",
-						"variables": "{\r\n    \"id\": \"{{createdEmployeeId}}\"\r\n}"
+						"query": "# Update mutation request to delete an employee.\r\n# The ID used is the created employee ID stored in Postman collection (no need to change).\r\n# Check the schema on how to delete an employee.\r\n# Use a named mutation with variables if possible.\r\n# !!!NOTE!!!: You must successfully run `Create Employee` test first before running this test.",
+						"variables": "{\r\n    // Use this as the parameter in your named mutation\r\n    \"id\": \"{{createdEmployeeId}}\"\r\n}"
 					},
 					"options": {
 						"raw": {
@@ -808,7 +868,7 @@
 			"response": []
 		},
 		{
-			"name": "Create Company",
+			"name": "15 - Create Company",
 			"event": [
 				{
 					"listen": "test",
@@ -868,7 +928,7 @@
 			"response": []
 		},
 		{
-			"name": "Update Company",
+			"name": "16 - Update Company",
 			"event": [
 				{
 					"listen": "test",
@@ -926,7 +986,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete Company",
+			"name": "17 - Delete Company",
 			"event": [
 				{
 					"listen": "test",
@@ -1008,7 +1068,7 @@
 	],
 	"variable": [
 		{
-			"id": "7b7523ca-3429-4480-97e4-c143820dab27",
+			"id": "e17f2470-c920-4d5c-9a89-1bafb4b46d46",
 			"key": "graphql_endpoint",
 			"value": "http://localhost:54321"
 		}

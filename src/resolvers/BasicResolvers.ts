@@ -1,5 +1,4 @@
 import { IResolvers } from "graphql-tools";
-import { JobGrade } from "../entities/Employee";
 
 /**
  * Resolvers:
@@ -36,54 +35,40 @@ const BasicResolvers: IResolvers = {
         },
 
         /**
-         * Returns the GraphQL server components
+         * [PART 1-02] Returns the GraphQL server components
          */
-        serverComponents: (): string => {
-            return "The Query, The Schema, and The Resolver";
-        },
+        // Put code here
 
         /**
-         * Returns an integer type
+         * [PART 1-03] Returns an integer type
          */
-        thisIsAnInt: (): number => {
-            return 19;
-        },
+        // Put code here
 
         /**
-         * Returns a float type
+         * [PART 1-03] Returns a float type
          */
-        thisIsAFloat: (): number => {
-            return 712.94;
-        },
+        // Put code here
 
         /**
-         * Returns a boolean type
+         * [PART 1-03] Returns a boolean type
          */
-        thisIsABoolean: (): boolean => {
-            return true;
-        },
+        // Put code here
 
         /**
-         * Returns an ID type
+         * [PART 1-03] Returns an ID type
          * (IDs are serialized as strings)
          */
-        thisIsAnId: (): string => {
-            return "ID00001";
-        },
+        // Put code here
 
         /**
-         * Returns an enumeration type
+         * [PART 1-03] Returns an enumeration (JobGrade) type
          */
-        thisIsAnEnum: (): JobGrade => {
-            return JobGrade.M1;
-        },
-        
+        // Put code here
+
         /**
-         * Returns a list type
+         * [PART 1-03] Returns a list type
          */
-        thisIsAList: (): string[] => {
-            return [ "Hello", "world", "!" ];
-        }
+        // Put code here
     }
 };
 
