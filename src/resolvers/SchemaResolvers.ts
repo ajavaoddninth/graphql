@@ -1,6 +1,6 @@
 import { GraphQLDateTime } from "graphql-iso-date";
 import { IResolvers, mergeResolvers } from "graphql-tools";
-import BeginnerResolvers from "./BeginnerResolvers";
+import BasicResolvers from "./BasicResolvers";
 import CompanyResolvers from "./CompanyResolvers";
 import EmployeeResolvers from "./EmployeeResolvers";
 import PollOptionResolvers from "./PollOptionResolvers";
@@ -13,10 +13,10 @@ const CustomScalarResolvers: IResolvers = {
     DateTime: GraphQLDateTime
 };
 
-// Merge all defined resolvers into one big object.
+// Merge all defined resolvers into one big schema resolver.
 // DO NOT MODIFY.
 export default mergeResolvers([
-    BeginnerResolvers,
+    BasicResolvers,
     CompanyResolvers,
     EmployeeResolvers,
     PollResolvers,

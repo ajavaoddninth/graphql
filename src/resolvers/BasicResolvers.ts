@@ -20,7 +20,7 @@ import { GraphQLDateTime } from "graphql-iso-date";
  *           - `info`:    Holds field-specific info (rarely used)
  *     - Read more: https://graphql.org/learn/execution/
  */
-const BeginnerResolvers: IResolvers = {
+const BasicResolvers: IResolvers = {
     Query: {
         helloWorld: (): string => {
             return "Hello world!";
@@ -56,4 +56,4 @@ const BeginnerResolvers: IResolvers = {
     }
 };
 
-export default BeginnerResolvers;
+export default BasicResolvers;
