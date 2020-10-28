@@ -24,6 +24,7 @@ type Employee {
     tenure: Int
     isWfh: Boolean
     jobGrade: JobGrade
+    userName: String
 }
 
 type Poll {

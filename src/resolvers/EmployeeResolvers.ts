@@ -4,7 +4,7 @@ import EmployeeInput from "../inputTypes/EmployeeInput";
 import Context from "../context/Context";
 import UserInputError from "../errors/UserInputError";
 
-const EMAIL_PATTERN = /^(?:i)(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const EMAIL_PATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 /**
  * Resolvers of fields related to employees
@@ -128,7 +128,7 @@ const EmployeeResolvers: IResolvers = {
             if (!args.employeeDetails.lastName) {
                 validationErrors.lastName = "Last name should not be empty";
             }
-            
+
             // Validate email
             if (!EMAIL_PATTERN.test(args.employeeDetails.email)) {
                 validationErrors.email = "E-mail not in proper format";
@@ -149,7 +149,8 @@ const EmployeeResolvers: IResolvers = {
                 firstName: args.employeeDetails.firstName,
                 lastName: args.employeeDetails.lastName,
                 companyId: args.companyId,
-                email: args.employeeDetails.email
+                email: args.employeeDetails.email,
+                userName: args.employeeDetails.userName
             });
         },
 
@@ -167,25 +168,10 @@ const EmployeeResolvers: IResolvers = {
             if (!context.employees.has(args.id)) {
                 validationErrors.id = "No employee exists";
             }
-
-            // Validate first name
-            if (!args.employeeDetails.firstName) {
-                validationErrors.firstName = "First name should not be empty";
-            }
-
-            // Validate last name
-            if (!args.employeeDetails.lastName) {
-                validationErrors.lastName = "Last name should not be empty";
-            }
             
             // Validate email
-            if (!EMAIL_PATTERN.test(args.employeeDetails.email)) {
+            if (args.employeeDetails.email && !EMAIL_PATTERN.test(args.employeeDetails.email)) {
                 validationErrors.email = "E-mail not in proper format";
-            }
-
-            // Validate user name
-            if (!args.employeeDetails.userName) {
-                validationErrors.userName = "User name should not be empty";
             }
 
             if (Object.keys(validationErrors).length > 0) {

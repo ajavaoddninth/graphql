@@ -81,16 +81,6 @@ const CompanyResolvers: IResolvers = {
                 validationErrors.id = "No company exists";
             }
 
-            // Validate company name
-            if (!args.companyDetails.name) {
-                validationErrors.name = "Company name should not be empty";
-            }
-
-            // Validate company location
-            if (!args.companyDetails.location) {
-                validationErrors.location = "Company location should not be empty";
-            }
-
             if (Object.keys(validationErrors).length > 0) {
                 throw new UserInputError(
                     "Failed to update a company due to validation errors",

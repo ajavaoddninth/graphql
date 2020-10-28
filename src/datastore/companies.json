@@ -8,15 +8,5 @@
     "id": "CITECH01",
     "name": "Canon Information Technologies, Philippines, Inc.",
     "location": "Manila"
-  },
-  {
-    "id": "UPDATECOMP01",
-    "name": "CEL",
-    "location": "3TS"
-  },
-  {
-    "id": "DELETECOMP01",
-    "name": "DELETE COMPANY",
-    "location": "DELETE LOCATION"
   }
 ]

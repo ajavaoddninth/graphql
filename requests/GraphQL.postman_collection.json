@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5a4ea088-0e31-4a16-af28-d3a567493955",
+		"_postman_id": "46f7e1d1-090f-42d3-b0a0-17f7cd98c378",
 		"name": "GraphQL",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,7 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b2956e85-dfc9-4d1d-b55a-f379739415f0",
+						"id": "1c5a8c50-8ef6-423e-888c-3ee787a9074f",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -32,7 +32,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "{\r\n    helloWorld\r\n}",
+						"query": "# Update query to get \"Hello world!\"\r\n# Check the schema on how to get the value\r\n\r\n{\r\n    helloWorld\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -42,12 +42,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -69,7 +67,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "59f613f5-aac0-42d4-9af0-59eaf1a9a254",
+						"id": "f5142f6b-9ab4-4270-958a-cc9c76eeb4c2",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -77,7 +75,6 @@
 							"\r",
 							"pm.test(\"The Query, the Schema, and the Resolver\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.data.helloWorld).to.eql(\"Hello world!\");\r",
 							"    pm.expect(jsonData.data.serverComponents).to.eql(\"The Query, The Schema, and The Resolver\");\r",
 							"});"
 						],
@@ -91,7 +88,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "{\r\n    helloWorld\r\n    serverComponents\r\n}",
+						"query": "# Update schema and resolver.\r\n# Create a field `serverComponents` in Query type to return \"The Query, The Schema, and The Resolver\".\r\n\r\n{\r\n    serverComponents\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -101,12 +98,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -128,7 +123,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "8ca2ca20-1fd8-4747-bef9-c2db90d794a5",
+						"id": "7e371616-cf91-4f76-b661-0b615e2831eb",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -136,8 +131,6 @@
 							"\r",
 							"pm.test(\"GraphQL Scalar Type\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.data.helloWorld).to.eql(\"Hello world!\");\r",
-							"    pm.expect(jsonData.data.helloWorld).to.be.a(\"string\");\r",
 							"    \r",
 							"    pm.expect(jsonData.data.thisIsAnInt).to.eql(19);\r",
 							"    pm.expect(jsonData.data.thisIsAnInt).to.be.a(\"number\");\r",
@@ -152,6 +145,11 @@
 							"\r",
 							"    pm.expect(jsonData.data.thisIsAnEnum).to.eql(\"Manager\");\r",
 							"    pm.expect(jsonData.data.thisIsAnEnum).to.be.a(\"string\");\r",
+							"\r",
+							"    pm.expect(jsonData.data.thisIsAList).to.be.an(\"array\");\r",
+							"    pm.expect(jsonData.data.thisIsAList[0]).to.eql(\"Hello\");\r",
+							"    pm.expect(jsonData.data.thisIsAList[1]).to.eql(\"world\");\r",
+							"    pm.expect(jsonData.data.thisIsAList[2]).to.eql(\"!\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -164,7 +162,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "{\r\n    helloWorld\r\n    thisIsAnInt\r\n    thisIsAFloat\r\n    thisIsABoolean\r\n    thisIsAnId\r\n    thisIsAnEnum\r\n}",
+						"query": "# Update query, schema, and resolver to return the following:\r\n# * thisIsAnInt: returns 19\r\n# * thisIsAFloat: returns 712.94\r\n# * thisIsABoolean: returns true\r\n# * thisIsAnId: returns \"ID00001\"\r\n# * thisIsAnEnum: returns JobGrade.M1 (\"Manager\")\r\n# * thisIsAList: returns [ \"Hello\", \"world\", \"!\" ]\r\n\r\n{\r\n    thisIsAnInt\r\n    thisIsAFloat\r\n    thisIsABoolean\r\n    thisIsAnId\r\n    thisIsAnEnum\r\n    thisIsAList\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -174,12 +172,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -201,7 +197,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0c5737ce-8517-4810-8fa6-e4300bea7bc9",
+						"id": "b4f4eb7a-7127-421c-9611-aef79f1cc0cb",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -211,6 +207,17 @@
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.data.employees).to.be.not.empty\r",
 							"    pm.expect(jsonData.data.employees).to.be.an(\"array\");\r",
+							"\r",
+							"    for (let employee of jsonData.data.employees) {\r",
+							"        pm.expect(employee).to.have.own.property(\"id\");\r",
+							"        pm.expect(employee).to.have.own.property(\"firstName\");\r",
+							"        pm.expect(employee).to.have.own.property(\"lastName\");\r",
+							"        pm.expect(employee).to.have.own.property(\"email\");\r",
+							"        pm.expect(employee).to.have.own.property(\"companyId\");\r",
+							"        pm.expect(employee).to.have.own.property(\"weight\");\r",
+							"        pm.expect(employee).to.have.own.property(\"tenure\");\r",
+							"        pm.expect(employee).to.have.own.property(\"isWfh\");\r",
+							"    }\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -223,7 +230,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "{\r\n    employees{\r\n        id\r\n        firstName\r\n        lastName\r\n        email\r\n        companyId\r\n        weight\r\n        tenure\r\n        isWfh\r\n    }\r\n}",
+						"query": "# Update query to get all employees with following fields:\r\n# - id\r\n# - firstName\r\n# - lastName\r\n# - email\r\n# - companyId\r\n# - weight\r\n# - tenure\r\n# - isWfh\r\n# Check the schema and resolvers on how to get the list of employees\r\n\r\n{\r\n    employees {\r\n        id\r\n        firstName\r\n        lastName\r\n        email\r\n        companyId\r\n        weight\r\n        tenure\r\n        isWfh\r\n    }\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -233,12 +240,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -260,7 +265,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "412596b9-46e1-4ffa-a910-0420a7760fca",
+						"id": "1e1073e8-54a2-4ee9-b6e8-b582c2137a52",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -283,7 +288,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "{\r\n  employeeById(id:\"EMP005\"){\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
+						"query": "# Update query to get employee with ID \"EMP005\" and return the following fields:\r\n# - id\r\n# - firstName\r\n# - lastName\r\n# Check the schema on how to get an employee by ID\r\n\r\n{\r\n  employeeById(id:\"EMP005\") {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -293,12 +298,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -319,7 +322,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "da92e152-6081-41c2-94fb-5434508ef8b1",
+						"id": "08a5ac5a-b1db-4c26-8978-8329f1c41ab0",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -342,7 +345,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "{\r\n  employeeByName(name:\"Nick Schrock\"){\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
+						"query": "# Update the schema and resolver to get an employee by full name\r\n\r\n{\r\n  employeeByName(name:\"Nick Schrock\") {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -352,12 +355,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -378,7 +379,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "46c09543-a3a0-4553-89f2-d562cde43237",
+						"id": "b81a4270-c1c2-462e-9b29-ac51b04f475d",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -401,7 +402,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "{\r\n  employeesTenureLessThan(tenure:12){\r\n    id\r\n    firstName\r\n    lastName\r\n    tenure\r\n  }\r\n}",
+						"query": "# Update query, schema and resolver to get a list of employees with tenure less than 12,\r\n# and get the following fields:\r\n# - id\r\n# - firstName\r\n# - lastName\r\n# - tenure\r\n# Use `employeesTenureLessThan` as the new field under Query type\r\n# and `tenure` as the argument.\r\n\r\n{\r\n  employeesTenureLessThan(tenure:12) {\r\n    id\r\n    firstName\r\n    lastName\r\n    tenure\r\n  }\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -411,12 +412,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -432,22 +431,26 @@
 			"response": []
 		},
 		{
-			"name": "Get Employee With Multiple Arguments (Argument: ID)",
+			"name": "Get Employee With Multiple Optional Arguments",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "616120bd-b2dd-4c0f-b189-db58f00c6b92",
+						"id": "a45daf12-9f4c-419b-8816-e691490acef9",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Get Employee With Multiple Arguments (ID)\", function () {\r",
+							"pm.test(\"Get Employee With Multiple Optional Arguments\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.data.employee.id).to.eql(\"EMP003\");\r",
-							"    pm.expect(jsonData.data.employee.firstName).to.eql(\"Lee\");\r",
-							"    pm.expect(jsonData.data.employee.lastName).to.eql(\"Byron\");\r",
+							"    pm.expect(jsonData.data.emp003Employee.id).to.eql(\"EMP003\");\r",
+							"    pm.expect(jsonData.data.emp003Employee.firstName).to.eql(\"Lee\");\r",
+							"    pm.expect(jsonData.data.emp003Employee.lastName).to.eql(\"Byron\");\r",
+							"\r",
+							"    pm.expect(jsonData.data.leeEmployee.id).to.eql(\"EMP003\");\r",
+							"    pm.expect(jsonData.data.leeEmployee.firstName).to.eql(\"Lee\");\r",
+							"    pm.expect(jsonData.data.leeEmployee.lastName).to.eql(\"Byron\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -460,7 +463,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "{\r\n  employee(id:\"EMP003\"){\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
+						"query": "# Update schema and resolvers to get an employee by ID or first name.\r\n# Use a single field `employee` under Query type with optional arguments\r\n# `id` and `firstName`.\r\n\r\n{\r\n  # You can rename fields in queries\r\n  emp003Employee: employee(id:\"EMP003\") {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n  # You can rename fields in queries\r\n  leeEmployee: employee(firstName:\"Lee\") {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -470,12 +473,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -491,71 +492,12 @@
 			"response": []
 		},
 		{
-			"name": "Get Employee With Multiple Arguments (Argument: firstName)",
+			"name": "Named GraphQL Request with Variables",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "b8cee1bb-800e-480c-903d-dfc90104e836",
-						"exec": [
-							"pm.test(\"Status code is 200 OK\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Get Employee With Multiple Arguments (firstName)\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.data.employee.id).to.eql(\"EMP003\");\r",
-							"    pm.expect(jsonData.data.employee.firstName).to.eql(\"Lee\");\r",
-							"    pm.expect(jsonData.data.employee.lastName).to.eql(\"Byron\");\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "{\r\n  employee(firstName:\"Lee\"){\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
-						"variables": ""
-					},
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"graphql"
-					],
-					"query": [
-						{
-							"key": "test",
-							"value": "test",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Named GraphQL Request",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "fd99f85e-8530-407d-adf5-df580be0d3eb",
+						"id": "031dd970-4e78-4143-aee3-adad117859ac",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -578,7 +520,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query employeeByFirstName($firstName:String) { \r\n  employee(firstName:$firstName)\r\n  {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
+						"query": "# This is the syntax for named queries with variables.\r\n# Add a variable `$firstName` to the named query and update the\r\n# `GRAPHQL VARIABLES` tab to put a valid JSON object.\r\n# To construct a named query with variables, check the following:\r\n#     https://graphql.org/learn/queries/#operation-name\r\n#     https://graphql.org/learn/queries/#variables\r\n#     https://learning.postman.com/docs/sending-requests/supported-api-frameworks/graphql#working-with-graphql-variables\r\n\r\nquery employeeByFirstName($firstName:String) { \r\n  employee(firstName:$firstName) {\r\n    id\r\n    firstName\r\n    lastName\r\n  }\r\n}",
 						"variables": "{\r\n  \"firstName\": \"Jonathan\"\r\n}"
 					},
 					"options": {
@@ -588,12 +530,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -614,7 +554,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "3ccd5198-9e1b-4902-aab3-500277f3279a",
+						"id": "45842f24-6efb-4cd2-8d93-938f8f8613c6",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -639,7 +579,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "{\r\n  employeesByJobGrade(jobGrade:CuteEngineer){\r\n    id\r\n    firstName\r\n    lastName\r\n    jobGrade\r\n  }\r\n}",
+						"query": "# Update query to get a `CuteEngineer` employee\r\n# Check the schema on how to get an employee by job grade \r\n\r\n{\r\n  employeesByJobGrade(jobGrade:CuteEngineer) {\r\n    id\r\n    firstName\r\n    lastName\r\n    jobGrade\r\n  }\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -649,12 +589,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -675,7 +613,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "e9e0850d-ee1c-4335-bb2f-9d4f74b2ad90",
+						"id": "4ddb0b40-2da9-4fc7-99db-0a9df82f179a",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -688,9 +626,9 @@
 							"    pm.expect(jsonData.data.createEmployee.firstName).to.eql(\"John\");\r",
 							"    pm.expect(jsonData.data.createEmployee.lastName).to.eql(\"Doe\");\r",
 							"    pm.expect(jsonData.data.createEmployee.email).to.eql(\"john.doe@citech.com\");\r",
+							"    pm.expect(jsonData.data.createEmployee.userName).to.eql(\"john.doe\");\r",
 							"\r",
-							"    pm.variables.set('createdEmployeeId', jsonData.data.createEmployee.id);\r",
-							"    console.log(pm.variables.get(\"createdEmployeeId\"));\r",
+							"    pm.collectionVariables.set(\"createdEmployeeId\", jsonData.data.createEmployee.id);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -703,8 +641,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation {\r\n  createEmployee(companyId:\"CITECH01\", employeeDetails: {firstName:\"John\", lastName:\"Doe\", email:\"john.doe@citech.com\"})\r\n  {\r\n      id\r\n      firstName\r\n      lastName\r\n      email\r\n  }\r\n}",
-						"variables": ""
+						"query": "# Update mutation to create an employee with following details\r\n# * companyId: \"CITECH01\"\r\n# * firstName: \"John\"\r\n# * lastName: \"Doe\"\r\n# * email: \"john.doe@citech.com\"\r\n# * userName: \"john.doe\"\r\n# Check the schema on how to create an employee.\r\n# As much as possible, use a named mutation with variables.\r\n\r\nmutation CreateEmployee($companyId: ID!, $employeeDetails: EmployeeInput) {\r\n  createEmployee(companyId: $companyId, employeeDetails: $employeeDetails) {\r\n      id\r\n      firstName\r\n      lastName\r\n      email\r\n      userName\r\n  }\r\n}",
+						"variables": "{\r\n    \"companyId\": \"CITECH01\",\r\n    \"employeeDetails\": {\r\n        \"firstName\": \"John\",\r\n        \"lastName\": \"Doe\",\r\n        \"email\": \"john.doe@citech.com\",\r\n        \"userName\": \"john.doe\"\r\n    }\r\n}"
 					},
 					"options": {
 						"raw": {
@@ -713,12 +651,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -739,7 +675,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "c32adbe0-2a7f-40ba-9839-33dbd2716aa8",
+						"id": "23ee2f18-fd08-4ffa-8faf-c96ac4a87dfa",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -748,10 +684,11 @@
 							"pm.test(\"Update Employee GraphQL Request\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.data.updateEmployee).not.to.be.empty;\r",
-							"    pm.expect(jsonData.data.updateEmployee.id).to.eql(\"UPDATEID01\");\r",
+							"    pm.expect(jsonData.data.updateEmployee.id).to.eql(pm.collectionVariables.get(\"createdEmployeeId\"));\r",
 							"    pm.expect(jsonData.data.updateEmployee.firstName).to.eql(\"Jonathan\");\r",
 							"    pm.expect(jsonData.data.updateEmployee.lastName).to.eql(\"Wick\");\r",
 							"    pm.expect(jsonData.data.updateEmployee.email).to.eql(\"jon.wick@citech.com\");\r",
+							"    pm.expect(jsonData.data.updateEmployee.userName).to.eql(\"jon.wick\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -760,7 +697,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "e5ec9003-0cc4-4301-b9f9-84078c541b25",
+						"id": "6171a2ab-ab8b-4f55-b954-e2826d11fc11",
 						"exec": [
 							""
 						],
@@ -774,8 +711,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation {\r\n  updateEmployee(id:\"UPDATEID01\", employeeDetails: {firstName:\"Jonathan\", lastName:\"Wick\", email:\"jon.wick@citech.com\"})\r\n  {\r\n      id\r\n      firstName\r\n      lastName\r\n      email\r\n  }\r\n}",
-						"variables": "{\r\n    \"id\": \"{{createdEmployeeId}}\"\r\n}"
+						"query": "# Update query to update the employee with the following:\r\n# * firstName: \"Jonathan\"\r\n# * lastName: \"Wick\"\r\n# * email: \"john.wick@citech.com\"\r\n# * userName: \"john.wick\"\r\n# The ID used is the created employee ID stored in Postman collection (no need to change).\r\n# Check the schema on how to update an employee.\r\n# Use a named mutation with variables if possible.\r\n# !!!NOTE!!!: You must successfully run `Create Employee` test first before running this test.\r\n\r\nmutation UpdateEmployee($id: ID!, $employeeDetails: EmployeeInput) {\r\n  updateEmployee(id: $id, employeeDetails: $employeeDetails) {\r\n      id\r\n      firstName\r\n      lastName\r\n      email\r\n      userName\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"{{createdEmployeeId}}\",\r\n    \"employeeDetails\": {\r\n        \"firstName\": \"Jonathan\",\r\n        \"lastName\": \"Wick\",\r\n        \"email\": \"jon.wick@citech.com\",\r\n        \"userName\": \"jon.wick\"\r\n    }\r\n}"
 					},
 					"options": {
 						"raw": {
@@ -784,12 +721,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -810,7 +745,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "38f5b8df-a19f-4b31-9236-664125ee0b2d",
+						"id": "2bdbd2e5-4a14-40fb-b348-270cd43d7714",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -819,7 +754,8 @@
 							"pm.test(\"Delete Employee GraphQL Request\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.data.deleteEmployee).not.to.be.empty;\r",
-							"    pm.expect(jsonData.data.deleteEmployee.id).to.eql(\"DELETEID01\");\r",
+							"    pm.expect(jsonData.data.deleteEmployee.id).to.eql(pm.collectionVariables.get(\"createdEmployeeId\"));\r",
+							"    pm.collectionVariables.unset(\"createdEmployeeId\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -828,7 +764,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "2304c55b-a90e-444d-985f-21fe43faadc0",
+						"id": "5ca85747-c891-4b0c-802f-d6c2827c8052",
 						"exec": [
 							""
 						],
@@ -842,8 +778,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation {\r\n  deleteEmployee(id:\"DELETEID01\")\r\n  {\r\n      id\r\n      firstName\r\n      lastName\r\n      email\r\n  }\r\n}",
-						"variables": ""
+						"query": "# Update query to delete an employee.\r\n# The ID used is the created employee ID stored in Postman collection (no need to change).\r\n# Check the schema on how to delete an employee.\r\n# Use a named mutation with variables if possible.\r\n# !!!NOTE!!!: You must successfully run `Create Employee` test first before running this test.\r\n\r\nmutation DeleteEmployee($id: ID!) {\r\n  deleteEmployee(id: $id) {\r\n      id\r\n      firstName\r\n      lastName\r\n      email\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"{{createdEmployeeId}}\"\r\n}"
 					},
 					"options": {
 						"raw": {
@@ -852,12 +788,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -879,7 +813,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "708db2be-d1c3-4f89-bd3b-03e517ade212",
+						"id": "22343809-4642-4737-8942-1515b7bcab9d",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -891,6 +825,8 @@
 							"    pm.expect(jsonData.data.createCompany.id).not.to.be.null;\r",
 							"    pm.expect(jsonData.data.createCompany.name).to.eql(\"CINC\");\r",
 							"    pm.expect(jsonData.data.createCompany.location).to.eql(\"Japan\");\r",
+							"\r",
+							"    pm.collectionVariables.set(\"createdCompanyId\", jsonData.data.createCompany.id);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -903,7 +839,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation {\r\n  createCompany(companyDetails: {name:\"CINC\", location:\"Japan\"})\r\n  {\r\n      id\r\n      name\r\n      location      \r\n  }\r\n}",
+						"query": "# Update schema and resolver to create a company.\r\n# Use the field `createCompany` with CompanyInput `companyDetails` as the argument. \r\n\r\nmutation {\r\n  createCompany(companyDetails: {name:\"CINC\", location:\"Japan\"}) {\r\n      id\r\n      name\r\n      location\r\n  }\r\n}",
 						"variables": ""
 					},
 					"options": {
@@ -913,12 +849,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -939,7 +873,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "66e66dfe-b9ad-4ed4-991a-d32414343d17",
+						"id": "27798c56-5c9a-4add-911e-e1f2e38d4621",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -948,7 +882,7 @@
 							"pm.test(\"Update Company GraphQL Request\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.data.updateCompany).not.to.be.empty;\r",
-							"    pm.expect(jsonData.data.updateCompany.id).to.eql(\"UPDATECOMP01\");\r",
+							"    pm.expect(jsonData.data.updateCompany.id).to.eql(pm.collectionVariables.get(\"createdCompanyId\"));\r",
 							"    pm.expect(jsonData.data.updateCompany.name).to.eql(\"CEL Update\");\r",
 							"    pm.expect(jsonData.data.updateCompany.location).to.eql(\"3TS Building\");\r",
 							"});"
@@ -963,8 +897,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation {\r\n  updateCompany(id:\"UPDATECOMP01\", companyDetails: {name:\"CEL Update\", location:\"3TS Building\"})\r\n  {\r\n      id\r\n      name\r\n      location      \r\n  }\r\n}",
-						"variables": ""
+						"query": "# Update schema and resolver to update a company.\r\n# Use `updateCompany` as the field with ID! `id` and\r\n# CompanyInput `companyDetails` as arguments.\r\n# !!!NOTE!!!: You must successfully run `Create Company` test first before running this test.\r\n\r\nmutation UpdateCompany($id: ID!) {\r\n  updateCompany(id: $id, companyDetails: {name:\"CEL Update\", location:\"3TS Building\"})\r\n  {\r\n      id\r\n      name\r\n      location      \r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"{{createdCompanyId}}\"\r\n}"
 					},
 					"options": {
 						"raw": {
@@ -973,12 +907,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -999,7 +931,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "aee69e0e-693d-470b-af44-4d5ea990da52",
+						"id": "806ad326-0c55-483e-8021-402205530aca",
 						"exec": [
 							"pm.test(\"Status code is 200 OK\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -1008,7 +940,9 @@
 							"pm.test(\"Delete Company GraphQL Request\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.data.deleteCompany).not.to.be.empty;\r",
-							"    pm.expect(jsonData.data.deleteCompany.id).to.eql(\"DELETECOMP01\");\r",
+							"    pm.expect(jsonData.data.deleteCompany.id).to.eql(pm.collectionVariables.get(\"createdCompanyId\"));\r",
+							"\r",
+							"    pm.collectionVariables.unset(\"createdCompanyId\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -1021,8 +955,8 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation {\r\n  deleteCompany(id:\"DELETECOMP01\")\r\n  {\r\n      id\r\n      name\r\n      location      \r\n  }\r\n}",
-						"variables": ""
+						"query": "# Update schema and resolver to delete a company.\r\n# Use `deleteCompany` as the field with ID! `id` as argument.\r\n# !!!NOTE!!!: You must successfully run `Create Company` test first before running this test.\r\n\r\nmutation DeleteCompany($id: ID!) {\r\n  deleteCompany(id: $id)\r\n  {\r\n      id\r\n      name\r\n      location      \r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"{{createdCompanyId}}\"\r\n}"
 					},
 					"options": {
 						"raw": {
@@ -1031,12 +965,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/graphql",
-					"protocol": "http",
+					"raw": "{{graphql_endpoint}}/graphql",
 					"host": [
-						"localhost"
+						"{{graphql_endpoint}}"
 					],
-					"port": "4000",
 					"path": [
 						"graphql"
 					],
@@ -1050,6 +982,35 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3988457f-13e4-4cea-9ae7-4511352ec605",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "27346d14-8ada-45e3-ac6d-fedeb6d0fed8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "7b7523ca-3429-4480-97e4-c143820dab27",
+			"key": "graphql_endpoint",
+			"value": "http://localhost:54321"
 		}
 	],
 	"protocolProfileBehavior": {}

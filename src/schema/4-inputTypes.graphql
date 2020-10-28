@@ -9,6 +9,7 @@ input EmployeeInput {
     firstName: String
     lastName: String
     email: String
+    userName: String
 }
 
 input CompanyInput {

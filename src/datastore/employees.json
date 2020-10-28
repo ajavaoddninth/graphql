@@ -70,19 +70,5 @@
     "jobGrade": "CuteEngineer",
     "companyId": "CITECH01",
     "userName": "lorvin.de.la.cruz"
-  },
-  {
-    "id": "UPDATEID01",
-    "firstName": "Jonathan",
-    "lastName": "Wick",
-    "companyId": "CITECH01",
-    "email": "jon.wick@citech.com"
-  },
-  {
-    "id": "DELETEID01",
-    "firstName": "DeleteFirst",
-    "lastName": "DeleteLast",
-    "companyId": "CITECH01",
-    "email": "delete@citech.com"
   }
 ]
