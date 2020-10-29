@@ -15,5 +15,5 @@ $ npm start          # this will start the GraphQL server
 ### Accessing the GraphQL server using GraphiQL
 Verify the deployment by navigating to your server address in your preferred browser.
 ```sh
-http://localhost:4000/graphql
+http://localhost:<port>/graphql
 ```
